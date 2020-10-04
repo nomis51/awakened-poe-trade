@@ -7,7 +7,7 @@ import {
 } from '@/assets/data'
 import { ModifierType, sectionToStatStrings, tryFindModifier } from './modifiers'
 import { ItemCategory } from './meta'
-import { ParsedItem } from './ParsedItem'
+import { HeistJob, ParsedItem } from './ParsedItem'
 import { magicBasetype } from './magic-name'
 import { getRollAsSingleNumber } from './utils'
 
@@ -42,6 +42,7 @@ const parsers: ParserFn[] = [
   parseMap,
   parseSockets,
   parseProphecyMaster,
+  parseHeistMission,
   parseModifiers,
   parseModifiers,
   parseModifiers
@@ -64,6 +65,10 @@ export function parseClipboard (clipboard: string) {
   }, sections[0])
   sections = sections.filter(section => section.length)
 
+  if (sections[0][1] === _$[C.CANNOT_USE_ITEM]) {
+    sections[1].unshift(sections[0][0]) // `Rarity: xxx`
+    sections.shift()
+  }
   const parsed = parseNamePlate(sections[0])
   if (!parsed) {
     return null
@@ -268,9 +273,20 @@ function parseVaalGem (section: string[], item: ParsedItem) {
   if (item.rarity !== ItemRarity.Gem) return PARSER_SKIPPED
 
   if (section.length === 1) {
-    if (_$[C.VAAL_GEM].test(section[0])) {
-      const name = section[0]
-      item.name = ITEM_NAME_REF_BY_TRANSLATED.get(name) || name
+    let gemName: string | undefined
+    if ((gemName = _$[C.QUALITY_ANOMALOUS].exec(section[0])?.[1])) {
+      item.extra.altQuality = 'Anomalous'
+    } else if ((gemName = _$[C.QUALITY_DIVERGENT].exec(section[0])?.[1])) {
+      item.extra.altQuality = 'Divergent'
+    } else if ((gemName = _$[C.QUALITY_PHANTASMAL].exec(section[0])?.[1])) {
+      item.extra.altQuality = 'Phantasmal'
+    } else if (_$[C.VAAL_GEM].test(section[0])) {
+      gemName = section[0]
+      item.extra.altQuality = 'Superior'
+    }
+
+    if (gemName) {
+      item.name = ITEM_NAME_REF_BY_TRANSLATED.get(gemName) || gemName
       return SECTION_PARSED
     }
   }
@@ -287,6 +303,23 @@ function parseGem (section: string[], item: ParsedItem) {
 
     parseQualityNested(section, item)
 
+    // don't override if parsed in Vaal name section
+    if (!item.extra.altQuality) {
+      let gemName: string | undefined
+      if ((gemName = _$[C.QUALITY_ANOMALOUS].exec(item.name)?.[1])) {
+        item.extra.altQuality = 'Anomalous'
+      } else if ((gemName = _$[C.QUALITY_DIVERGENT].exec(item.name)?.[1])) {
+        item.extra.altQuality = 'Divergent'
+      } else if ((gemName = _$[C.QUALITY_PHANTASMAL].exec(item.name)?.[1])) {
+        item.extra.altQuality = 'Phantasmal'
+      } else {
+        item.extra.altQuality = 'Superior'
+      }
+      if (gemName) {
+        item.name = ITEM_NAME_REF_BY_TRANSLATED.get(gemName) || gemName
+      }
+    }
+
     return SECTION_PARSED
   }
   return SECTION_SKIPPED
@@ -297,8 +330,9 @@ function parseStackSize (section: string[], item: ParsedItem) {
     return PARSER_SKIPPED
   }
   if (section[0].startsWith(_$[C.TAG_STACK_SIZE])) {
-    // "Stack Size: 2/9"
-    item.stackSize = parseInt(section[0].substr(_$[C.TAG_STACK_SIZE].length), 10)
+    // Portal Scroll "Stack Size: 2 448/40"
+    const [value, max] = section[0].substr(_$[C.TAG_STACK_SIZE].length).replace(/\u00a0/g, '').split('/').map(Number)
+    item.stackSize = { value, max }
 
     if (item.category === ItemCategory.Seed) {
       parseSeedLevelNested(section, item)
@@ -558,4 +592,37 @@ function parseProphecyMaster (section: string[], item: ParsedItem) {
   }
 
   return SECTION_SKIPPED
+}
+
+function parseHeistMission (section: string[], item: ParsedItem) {
+  if (item.category !== ItemCategory.HeistBlueprint &&
+      item.category !== ItemCategory.HeistContract) return PARSER_SKIPPED
+
+  for (const line of section) {
+    if (line.startsWith(_$[C.TAG_AREA_LEVEL])) {
+      item.props.areaLevel = Number(line.substr(_$[C.TAG_AREA_LEVEL].length))
+      break
+    }
+  }
+  if (!item.props.areaLevel) {
+    return SECTION_SKIPPED
+  }
+
+  if (item.category === ItemCategory.HeistContract) {
+    let match = null as RegExpMatchArray | null
+    for (const line of section) {
+      if ((match = line.match(_$[C.HEIST_JOB]))) {
+        break
+      }
+    }
+    if (!match) throw new Error('never')
+
+    item.heistJob = {
+      name: Object.entries(_$)
+        .find(([_, tr]) => tr === match!.groups!.job)![0] as HeistJob,
+      level: Number(match.groups!.level)
+    }
+  }
+
+  return SECTION_PARSED
 }

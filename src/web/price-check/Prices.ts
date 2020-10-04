@@ -99,8 +99,7 @@ class PriceService {
       { overview: 'item', type: 'UniqueAccessory', loaded: 0 },
       { overview: 'item', type: 'Beast', loaded: 0 },
       { overview: 'item', type: 'Vial', loaded: 0 },
-      { overview: 'item', type: 'DeliriumOrb', loaded: 0 },
-      { overview: 'item', type: 'Seed', loaded: 0 }
+      { overview: 'item', type: 'DeliriumOrb', loaded: 0 }
     ]
   })
 
@@ -221,8 +220,8 @@ export const Prices = new PriceService()
 export function displayRounding (value: number, fraction: boolean = false): string {
   if (fraction && Math.abs(value) < 1) {
     if (value === 0) return '0'
-    const r = `1/${displayRounding(1 / value)}`
-    return r === '1/1' ? '1' : r
+    const r = `1\u200A/\u200A${displayRounding(1 / value)}`
+    return r === '1\u200A/\u200A1' ? '1' : r
   }
   if (Math.abs(value) < 10) {
     return Number(value.toFixed(1)).toString().replace('.', '\u200A.\u200A')

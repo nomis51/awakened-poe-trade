@@ -207,11 +207,7 @@ export default {
 
   &:focus {
     @apply border-gray-500;
-  }
-
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
+    cursor: none;
   }
 }
 
@@ -295,6 +291,7 @@ export default {
     "Evasion Rating: #": "Уклонение: #",
     "Energy Shield: #": "Энерг. щит: #",
     "+#% total to one of Elemental Resistances": "Всего +#% к сопротивлению одной из стихий",
+    "Map is not occupied by Elder Guardian": "Карта не захвачена Хранителем Древнего",
     "Block: #%": "Блок: #%",
     "variant": "вариант",
     "pseudo": "псевдо",

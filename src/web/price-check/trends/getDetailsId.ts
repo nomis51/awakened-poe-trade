@@ -56,13 +56,10 @@ function getGemDetailsId (item: ParsedItem) {
   if (item.name === PORTAL_GEM) {
     return 'portal-1'
   }
-  if (item.name.startsWith('Awakened')) {
-    return (item.props.gemLevel === 1)
-      ? `${nameToDetailsId(item.name)}-1-20`
-      : undefined
-  }
 
-  let id = nameToDetailsId(item.name)
+  let id = item.extra.altQuality === 'Superior'
+    ? nameToDetailsId(item.name)
+    : nameToDetailsId(`${item.extra.altQuality} ${item.name}`)
 
   if (
     SPECIAL_SUPPORT_GEM.includes(item.name) ||

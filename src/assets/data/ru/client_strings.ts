@@ -34,7 +34,7 @@ const dict: TranslationDict = {
   'Redeemer Item': 'Предмет Избавительницы',
   'Warlord Item': 'Предмет Вождя',
   'Synthesised Item': 'Синтезированный предмет',
-  '/^Synthesised (.*)$/': /^(?:Синтезированный|Синтезированная|Синтезированное|Синтезированные) (.*[^ ])[ ]*$/,
+  '/^Synthesised (.*)$/': /^(?:Синтезированный|Синтезированная|Синтезированное|Синтезированные) (.*?)\u00a0*$/,
   '/^Vaal .*$/': /^.* ваал$/,
   'Veiled Prefix': 'Завуалированный префикс',
   'Veiled Suffix': 'Завуалированный суффикс',
@@ -55,7 +55,22 @@ const dict: TranslationDict = {
   'You will find Niko and complete his mission.': 'Ты встретишь Нико и выполнишь его задание.',
   'You will find Jun and complete her mission.': 'Ты встретишь Джун и выполнишь её задание.',
   'You will find Zana and complete her mission.': 'Ты встретишь Зану и выполнишь её задание.',
-  'Blighted {0}': 'Заражённая {0}'
+  'Blighted {0}': 'Заражённая {0}',
+  'You cannot use this item. Its stats will be ignored': 'Вы не можете использовать этот предмет, его параметры не будут учтены',
+  '/^Anomalous (.*)$/': /^Аномальный: (.*)$/,
+  '/^Divergent (.*)$/': /^Искривлённый: (.*)$/,
+  '/^Phantasmal (.*)$/': /^Фантомный: (.*)$/,
+  '/^Requires (.+) \\(Level (\\d+)\\)$/': /^Требуется (?<job>.+) \((?<level>\d+) уровень\)$/,
+  'Area Level: ': 'Уровень области: ',
+  'Lockpicking': 'взлом',
+  'Counter-Thaumaturgy': 'контрмагия',
+  'Perception': 'восприятие',
+  'Deception': 'маскировка',
+  'Agility': 'проворство',
+  'Engineering': 'инженерное дело',
+  'Trap Disarmament': 'разминирование',
+  'Demolition': 'взрывное дело',
+  'Brute Force': 'грубая сила'
 }
 
 export default dict

@@ -13,20 +13,22 @@
       :filters="itemFilters"
       :stats="itemStats"
       :item="item"
-      @submit="intaractedOnce = true" />
+      @submit="interactedOnce = true" />
     <trade-listing
-      v-if="tradeAPI === 'trade' && intaractedOnce"
+      v-if="tradeAPI === 'trade' && interactedOnce"
       ref="tradeService"
       :filters="itemFilters"
       :stats="itemStats"
       :item="item" />
-    <div v-if="tradeAPI === 'trade' && !intaractedOnce">
-      <button class="btn" @click="intaractedOnce = true">{{ $t('Search') }}</button>
-    </div>
     <trade-bulk
-      v-if="tradeAPI === 'bulk'"
+      v-if="tradeAPI === 'bulk' && interactedOnce"
       ref="tradeService"
-      :filters="itemFilters" />
+      :filters="itemFilters"
+      :item="item" />
+    <div v-if="!interactedOnce">
+      <button class="btn" @click="interactedOnce = true">{{ $t('Search') }}</button>
+    </div>
+    <stack-value :filters="itemFilters" :item="item"/>
   </div>
 </template>
 
@@ -40,6 +42,7 @@ import FiltersBlock from './filters/FiltersBlock'
 import { createFilters } from './filters/create-item-filters'
 import { initUiModFilters } from './filters/create-stat-filters'
 import PricePrediction from './price-prediction/PricePrediction'
+import StackValue from './stack-value/StackValue'
 import FilterName from './filters/FilterName'
 import { CATEGORY_TO_TRADE_ID } from './trade/pathofexile-trade'
 import { Config } from '@/web/Config'
@@ -52,43 +55,41 @@ export default {
     TradeBulk,
     PriceTrend,
     FiltersBlock,
-    FilterName
+    FilterName,
+    StackValue
   },
   created () {
-    this.$watch(vm => [vm.itemFilters, vm.itemStats, vm.intaractedOnce], (curr, prev) => {
-      this.tradeAPI = apiToSatisfySearch(this.itemFilters, this.itemStats)
+    this.$watch(vm => [vm.item, vm.interactedOnce], (curr, prev) => {
+      if (this.interactedOnce === false) return
 
-      if (this.intaractedOnce === false) return
+      this.tradeAPI = apiToSatisfySearch(this.item, this.itemStats)
 
-      // NOTE: children component receives props on nextTick
+      // NOTE: child `trade-xxx` component renders/receives props on nextTick
       this.$nextTick(() => {
         if (this.$refs.tradeService) {
           this.$refs.tradeService.execSearch()
         }
       })
-    }, { deep: true })
+    }, { deep: false })
 
-    this.$watch(vm => [vm.itemStats, vm.intaractedOnce], (curr, prev) => {
-      const cItem = curr[0]
-      const pItem = prev[0]
-      const cIntaracted = curr[1]
-      const pIntaracted = prev[1]
+    this.$watch(vm => [vm.item, vm.interactedOnce, vm.itemStats, vm.itemFilters], (curr, prev) => {
+      const cItem = curr[0]; const pItem = prev[0]
+      const cIntaracted = curr[1]; const pIntaracted = prev[1]
 
       if (cItem === pItem && cIntaracted === true && pIntaracted === true) {
         // force user to press Search button on change
-        this.intaractedOnce = false
+        this.interactedOnce = false
       }
     }, { deep: true })
 
-    this.$watch(vm => [vm.itemFilters, vm.intaractedOnce], (curr, prev) => {
-      const cItem = curr[0]
-      const pItem = prev[0]
-      const cIntaracted = curr[1]
-      const pIntaracted = prev[1]
-      if (cItem === pItem && cIntaracted === false && pIntaracted === false) {
-        this.intaractedOnce = true
+    this.$watch(vm => [vm.item, JSON.stringify(vm.itemFilters && vm.itemFilters.trade)], (curr, prev) => {
+      const cItem = curr[0]; const pItem = prev[0]
+      const cTrade = curr[1]; const pTrade = prev[1]
+
+      if (cItem === pItem && cTrade !== pTrade) {
+        this.interactedOnce = true
       }
-    }, { deep: true })
+    }, { deep: false })
   },
   props: {
     item: {
@@ -100,7 +101,7 @@ export default {
     item (item) {
       this.itemFilters = createFilters(item)
       this.itemStats = initUiModFilters(item)
-      this.intaractedOnce = (
+      this.interactedOnce = (
         this.item.rarity === ItemRarity.Unique ||
         !CATEGORY_TO_TRADE_ID.has(this.item.category) ||
         Boolean(this.item.isUnidentified) ||
@@ -112,7 +113,7 @@ export default {
     return {
       itemFilters: null,
       itemStats: null,
-      intaractedOnce: false,
+      interactedOnce: false,
       tradeAPI: 'bulk'
     }
   },
@@ -123,6 +124,8 @@ export default {
       return this.item.rarity === ItemRarity.Rare &&
         this.item.category !== ItemCategory.Map &&
         this.item.category !== ItemCategory.CapturedBeast &&
+        this.item.category !== ItemCategory.HeistContract &&
+        this.item.category !== ItemCategory.HeistBlueprint &&
         !this.item.isUnidentified
     },
     show () {

@@ -2,6 +2,7 @@ import { ItemFilters } from './interfaces'
 import { ParsedItem, ItemCategory, ItemRarity } from '@/parser'
 import { VEILED_STAT } from './veiled'
 import { Leagues } from '../Leagues'
+import { tradeTag } from '../trade/common'
 
 export const SPECIAL_SUPPORT_GEM = ['Empower Support', 'Enlighten Support', 'Enhance Support']
 
@@ -22,6 +23,12 @@ export function createFilters (item: ParsedItem): ItemFilters {
       value: item.baseType || item.name
     }
     return filters
+  }
+  if (item.stackSize || tradeTag(item)) {
+    filters.stackSize = {
+      value: item.stackSize?.value || 1,
+      disabled: true
+    }
   }
   if (
     item.category === ItemCategory.MetamorphSample ||
@@ -78,6 +85,36 @@ export function createFilters (item: ParsedItem): ItemFilters {
     }
 
     // @TODO: juicy corrupted maps
+  } if (
+    item.category === ItemCategory.HeistContract ||
+    item.category === ItemCategory.HeistBlueprint
+  ) {
+    if (item.rarity === ItemRarity.Unique) {
+      filters.name = { value: item.name }
+      filters.baseType = { value: item.baseType! }
+    } else {
+      filters.category = {
+        value: item.category
+      }
+
+      filters.areaLevel = {
+        value: item.props.areaLevel!
+      }
+
+      if (item.heistJob) {
+        filters.heistJob = {
+          name: item.heistJob.name,
+          level: item.heistJob.level
+        }
+      }
+    }
+  } else if (
+    item.category === ItemCategory.ClusterJewel &&
+    item.rarity !== ItemRarity.Unique
+  ) {
+    filters.baseType = {
+      value: item.baseType || item.name
+    }
   } else if (item.rarity === ItemRarity.Unique) {
     filters.name = {
       value: item.name
@@ -145,7 +182,9 @@ export function createFilters (item: ParsedItem): ItemFilters {
     if (
       item.rarity !== ItemRarity.Unique &&
       item.category !== ItemCategory.Map &&
-      item.category !== ItemCategory.Jewel /* https://pathofexile.gamepedia.com/Jewel#Affixes */
+      item.category !== ItemCategory.Jewel && /* https://pathofexile.gamepedia.com/Jewel#Affixes */
+      item.category !== ItemCategory.HeistBlueprint &&
+      item.category !== ItemCategory.HeistContract
     ) {
       if (item.itemLevel > 86) {
         filters.itemLevel = {
@@ -260,6 +299,11 @@ function createGemFilters (item: ParsedItem, filters: ItemFilters) {
       min: item.props.gemLevel!,
       disabled: item.props.gemLevel! < 16
     }
+  }
+
+  filters.altQuality = {
+    value: item.extra.altQuality!,
+    disabled: false
   }
 
   return filters

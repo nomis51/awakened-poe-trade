@@ -1,6 +1,6 @@
 {
   "name": "awakened-poe-trade",
-  "version": "2.3.0",
+  "version": "2.5.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -24,26 +24,26 @@
   "main": "background.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.14.x",
-    "dot-prop": "5.2.x",
+    "dot-prop": "5.3.x",
     "electron-overlay-window": "github:nomis51/electron-overlay-window",
-    "electron-store": "6.0.0",
+    "electron-store": "5.2.x",
     "electron-updater": "^4.2.0",
     "fast-deep-equal": "3.1.x",
     "find-process": "^1.4.3",
-    "luxon": "1.24.x",
+    "luxon": "1.25.x",
     "portal-vue": "2.1.7",
     "robotjs": "^0.6.0",
-    "tailwindcss": "1.5.x",
-    "throttle-debounce": "2.2.x",
+    "tailwindcss": "1.8.x",
+    "throttle-debounce": "2.3.x",
     "uiohook-napi": "1.0.x",
     "vue": "2.6.x",
-    "vue-i18n": "8.19.x",
+    "vue-i18n": "8.21.x",
     "vue-popperjs": "2.3.0",
     "vue-router": "3.x.x",
-    "vue-slider-component": "3.2.2",
+    "vue-slider-component": "3.2.5",
     "vue-trend-chart": "0.15.2",
     "vue-virtual-scroller": "1.0.10",
-    "vuedraggable": "2.24.0",
+    "vuedraggable": "2.24.1",
     "winston": "3.x.x"
   },
   "devDependencies": {
@@ -53,15 +53,14 @@
     "@types/node": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
-    "@vue/cli-plugin-eslint": "~4.4.0",
-    "@vue/cli-plugin-router": "~4.4.0",
-    "@vue/cli-plugin-typescript": "~4.4.0",
-    "@vue/cli-service": "~4.4.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
     "@vue/eslint-config-standard": "^5.1.0",
     "@vue/eslint-config-typescript": "^5.0.1",
-    "electron": "9.1.1",
+    "electron": "9.3.1",
     "electron-devtools-installer": "^3.1.1",
-    "electron-icon-builder": "^1.0.2",
     "eslint": "^6.7.2",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
@@ -76,7 +75,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "resolutions": {
-    "vue-cli-plugin-electron-builder/electron-builder": "22.8.0"
+    "vue-cli-plugin-electron-builder/electron-builder": "22.8.1"
   },
   "engines": {
     "node": "14.x.x"

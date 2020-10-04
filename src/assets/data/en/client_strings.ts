@@ -53,7 +53,22 @@ const dict = {
   'You will find Niko and complete his mission.': 'You will find Niko and complete his mission.',
   'You will find Jun and complete her mission.': 'You will find Jun and complete her mission.',
   'You will find Zana and complete her mission.': 'You will find Zana and complete her mission.',
-  'Blighted {0}': 'Blighted {0}'
+  'Blighted {0}': 'Blighted {0}',
+  'You cannot use this item. Its stats will be ignored': 'You cannot use this item. Its stats will be ignored',
+  '/^Anomalous (.*)$/': /^Anomalous (.*)$/,
+  '/^Divergent (.*)$/': /^Divergent (.*)$/,
+  '/^Phantasmal (.*)$/': /^Phantasmal (.*)$/,
+  '/^Requires (.+) \\(Level (\\d+)\\)$/': /^Requires (?<job>.+) \(Level (?<level>\d+)\)$/,
+  'Area Level: ': 'Area Level: ',
+  'Lockpicking': 'Lockpicking',
+  'Counter-Thaumaturgy': 'Counter-Thaumaturgy',
+  'Perception': 'Perception',
+  'Deception': 'Deception',
+  'Agility': 'Agility',
+  'Engineering': 'Engineering',
+  'Trap Disarmament': 'Trap Disarmament',
+  'Demolition': 'Demolition',
+  'Brute Force': 'Brute Force'
 }
 
 export default dict

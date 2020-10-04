@@ -326,7 +326,7 @@
         "implicit": true
       },
       {
-        "text": "#% increased Cooldown Recovery of Travel Skills per Frenzy Charge",
+        "text": "#% increased Cooldown Recovery Rate of Travel Skills per Frenzy Charge",
         "bounds": [{"min": 7, "max": 10}]
       },
       {
@@ -403,7 +403,7 @@
         "bounds": [{"min": 20, "max": 30}]
       },
       {
-        "text": "Nearby Enemies are Crushed while you have least # Rage",
+        "text": "Nearby Enemies are Crushed while you have at least # Rage",
         "bounds": [{"min": 25, "max": 25}]
       },
       {
@@ -736,7 +736,7 @@
       },
       {
         "text": "Regenerate # Life per second",
-        "bounds": [{"min": 8, "max": 12}]
+        "bounds": [{"min": 16, "max": 24}]
       },
       {
         "text": "#% increased Life Recovery from Flasks",
@@ -944,8 +944,8 @@
         "bounds": [{"min": -1, "max": -1}]
       },
       {
-        "text": "You are Cursed with Level # Vulnerability",
-        "bounds": [{"min": 10, "max": 10}]
+        "text": "You are Cursed with Vulnerability, with #% increased Effect",
+        "bounds": [{"min": 40, "max": 40}]
       }
     ]
   },
@@ -977,8 +977,8 @@
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "You are Cursed with Level # Vulnerability",
-        "bounds": [{"min": 20, "max": 20}]
+        "text": "You are Cursed with Vulnerability, with #% increased Effect",
+        "bounds": [{"min": 80, "max": 80}]
       }
     ]
   },
@@ -1205,7 +1205,7 @@
         "bounds": [{"min": 5, "max": 5}]
       },
       {
-        "text": "You can apply an additional Curse",
+        "text": "You can apply one fewer Curse",
         "bounds": [{"min": 1, "max": 1}]
       }
     ]
@@ -1637,7 +1637,7 @@
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "Curse Enemies with Level # Poacher's Mark on Hit, which can apply to Hexproof Enemies",
+        "text": "Trigger Level # Poacher's Mark when you Hit a Rare or Unique Enemy",
         "bounds": [{"min": 30, "max": 30}]
       },
       {
@@ -1765,7 +1765,7 @@
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "Focus has #% increased Cooldown Recovery Speed",
+        "text": "Focus has #% increased Cooldown Recovery Rate",
         "bounds": [{"min": 30, "max": 50}]
       },
       {
@@ -2267,7 +2267,7 @@
         "implicit": true
       },
       {
-        "text": "#% chance to Curse Enemies with Socketed Curse Gem on Hit",
+        "text": "#% chance to Curse Enemies with Socketed Hex Curse Gem on Hit",
         "bounds": [{"min": 100, "max": 100}]
       }
     ]
@@ -2954,11 +2954,11 @@
         "bounds": [{"min": 20, "max": 30}]
       },
       {
-        "text": "Left Ring Slot: Your Chilling Skitterbot's Aura applies Socketed Curse instead",
+        "text": "Left Ring Slot: Your Chilling Skitterbot's Aura applies Socketed Hex Curse instead",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "Right Ring Slot: Your Shocking Skitterbot's Aura applies Socketed Curse instead",
+        "text": "Right Ring Slot: Your Shocking Skitterbot's Aura applies Socketed Hex Curse instead",
         "bounds": [{"min": 1, "max": 1}]
       }
     ]
@@ -3690,7 +3690,7 @@
         "bounds": [{"min": 10, "max": 15}]
       },
       {
-        "text": "#% increased Area of Effect of Curse Skills",
+        "text": "#% increased Area of Effect of Hex Skills",
         "bounds": [{"min": 60, "max": 60}]
       },
       {
@@ -4192,7 +4192,7 @@
         "bounds": [{"min": 15, "max": 20}]
       },
       {
-        "text": "#% increased Cooldown Recovery Speed",
+        "text": "#% increased Cooldown Recovery Rate",
         "bounds": [{"min": 15, "max": 20}]
       },
       {
@@ -4619,7 +4619,7 @@
         "bounds": [{"min": 15, "max": 20}]
       },
       {
-        "text": "#% increased Cooldown Recovery Speed",
+        "text": "#% increased Cooldown Recovery Rate",
         "bounds": [{"min": 15, "max": 20}]
       },
       {
@@ -4984,7 +4984,7 @@
         "bounds": [{"min": 20, "max": 30}]
       },
       {
-        "text": "Attacks have #% chance to cause Bleeding",
+        "text": "Attacks cannot cause Bleeding",
         "bounds": [{"min": 25, "max": 25}]
       },
       {
@@ -6111,8 +6111,8 @@
         "bounds": [{"min": 60, "max": 80}]
       },
       {
-        "text": "Curse Enemies with Level # Temporal Chains on Hit",
-        "bounds": [{"min": 10, "max": 10}]
+        "text": "Curse Enemies with Temporal Chains on Hit, with #% increased Effect",
+        "bounds": [{"min": 40, "max": 40}]
       },
       {
         "text": "Non-Aura Curses you inflict are not removed from Dying Enemies",
@@ -6228,7 +6228,7 @@
         "bounds": [{"min": 7, "max": 10}]
       },
       {
-        "text": "Curses on Slain Enemies are transferred to a nearby Enemy",
+        "text": "Hexes on Slain Enemies are transferred to a nearby Enemy",
         "bounds": [{"min": 1, "max": 1}]
       }
     ]
@@ -6325,7 +6325,7 @@
         "bounds": [{"min": -50, "max": -50}]
       },
       {
-        "text": "Curse Reflection",
+        "text": "Hex Reflection",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
@@ -6366,7 +6366,7 @@
         "bounds": [{"min": 20, "max": 30}]
       },
       {
-        "text": "Curse Reflection",
+        "text": "Hex Reflection",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
@@ -7116,7 +7116,7 @@
         "bounds": [{"min": 25, "max": 25}]
       },
       {
-        "text": "#% chance to Curse non-Cursed Enemies with Enfeeble on Hit",
+        "text": "Curse Non-Cursed Enemies with Enfeeble on Hit, with 80% increased Effect",
         "bounds": [{"min": 25, "max": 25}]
       }
     ]
@@ -7283,11 +7283,11 @@
         "bounds": [{"min": 17, "max": 29}]
       },
       {
-        "text": "You can apply an additional Curse",
+        "text": "You can apply one fewer Curse",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "Your Curses can apply to Hexproof Enemies",
+        "text": "Your Hexes can affect Hexproof Enemies",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
@@ -7836,7 +7836,7 @@
         "bounds": [{"min": 30, "max": 30}]
       },
       {
-        "text": "#% increased Effect of Chill",
+        "text": "#% increased Effect of Cold Ailments",
         "bounds": [{"min": 15, "max": 20}]
       }
     ]
@@ -8601,7 +8601,7 @@
         "bounds": [{"min": 200, "max": 250}]
       },
       {
-        "text": "#% increased Effect of Shock",
+        "text": "#% increased Effect of Lightning Ailments",
         "bounds": [{"min": 30, "max": 30}]
       }
     ]
@@ -9708,7 +9708,7 @@
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "Summoned Holy Relics have #% reduced Cooldown Recovery Speed",
+        "text": "Summoned Holy Relics have #% reduced Cooldown Recovery Rate",
         "bounds": [{"min": -25, "max": -20}]
       }
     ]
@@ -10114,7 +10114,7 @@
         "bounds": [{"min": 25, "max": 25}]
       },
       {
-        "text": "Attacks have #% chance to cause Bleeding",
+        "text": "Attacks cannot cause Bleeding",
         "bounds": [{"min": 25, "max": 25}]
       },
       {
@@ -12566,7 +12566,7 @@
         "bounds": [{"min": 7, "max": 8}]
       },
       {
-        "text": "Curse Enemies with Level # Assassin's Mark on Hit",
+        "text": "Trigger Level # Assassin's Mark when you Hit a Rare or Unique Enemy",
         "bounds": [{"min": 10, "max": 10}]
       },
       {
@@ -12943,7 +12943,7 @@
         "bounds": [{"min": 5, "max": 5}]
       },
       {
-        "text": "#% increased Warcry Cooldown Recovery Speed",
+        "text": "#% increased Warcry Cooldown Recovery Rate",
         "bounds": [{"min": 50, "max": 50}]
       }
     ]
@@ -13495,15 +13495,15 @@
         "bounds": [{"min": 5, "max": 5}]
       },
       {
-        "text": "Applies Level 15 Punishment on Blocking a Melee Attack, ignoring Curse Limit",
+        "text": "Curse Enemies with Punishment when you Block their Melee Damage, with 60% increased Effect and ignoring Curse Limit",
         "bounds": [{"min": 15, "max": 15}]
       },
       {
-        "text": "Applies Level 15 Temporal Chains on Blocking a Projectile Attack, ignoring Curse Limit",
+        "text": "Curse Enemies with Temporal Chains when you Block their Projectile Attack Damage, with 60% increased Effect and ignoring Curse Limit",
         "bounds": [{"min": 15, "max": 15}]
       },
       {
-        "text": "Applies Level 15 Elemental Weakness on Blocking a Spell, ignoring Curse Limit",
+        "text": "Curse Enemies with Elemental Weakness when you Block their Spell Damage, with 60% increased Effect and ignoring Curse Limit",
         "bounds": [{"min": 15, "max": 15}]
       }
     ]
@@ -13530,7 +13530,7 @@
     },
     "stats": [
       {
-        "text": "Curses in this item are reflected back to you",
+        "text": "Hexes applied by Socketed Curse Skills are Reflected back to you",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
@@ -14106,8 +14106,8 @@
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "Inflicts a random Level # Curse on you when your Totems die",
-        "bounds": [{"min": 20, "max": 20}]
+        "text": "Inflicts a random Hex on you when your Totems die, with #% more Effect",
+        "bounds": [{"min": 80, "max": 80}]
       }
     ]
   },
@@ -14374,7 +14374,7 @@
         "bounds": [{"min": 20, "max": 20}]
       },
       {
-        "text": "#% increased Shock Duration on Enemies",
+        "text": "#% increased Duration of Lightning Ailments",
         "bounds": [{"min": 50, "max": 50}]
       },
       {
@@ -14382,7 +14382,7 @@
         "bounds": [{"min": 30, "max": 30}]
       },
       {
-        "text": "#% increased Effect of Shock",
+        "text": "#% increased Effect of Lightning Ailments",
         "bounds": [{"min": 15, "max": 25}]
       }
     ]
@@ -14885,7 +14885,7 @@
         "bounds": [{"min": 30, "max": 50}]
       },
       {
-        "text": "Curse Enemies with Level 5 Vulnerability on Block",
+        "text": "Curse Enemies with Vulnerability on Block, with 20% increased Effect",
         "bounds": [{"min": 5, "max": 5}]
       }
     ]
@@ -14988,7 +14988,7 @@
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "#% increased Warcry Cooldown Recovery Speed",
+        "text": "#% increased Warcry Cooldown Recovery Rate",
         "bounds": [{"min": 50, "max": 50}]
       }
     ]
@@ -15660,7 +15660,7 @@
         "bounds": [{"min": 30, "max": 40}]
       },
       {
-        "text": "Travel Skills have #% increased Cooldown Recovery Speed",
+        "text": "#% increased Cooldown Recovery Rate of Travel Skills",
         "bounds": [{"min": 50, "max": 80}]
       },
       {
@@ -16097,7 +16097,7 @@
         "bounds": [{"min": 25, "max": 30}]
       },
       {
-        "text": "#% increased Shock Duration on Enemies",
+        "text": "#% increased Duration of Lightning Ailments",
         "bounds": [{"min": 100, "max": 100}]
       },
       {
@@ -16156,7 +16156,7 @@
         "bounds": [{"min": 60, "max": 90}]
       },
       {
-        "text": "#% increased Cooldown Recovery Speed for throwing Traps",
+        "text": "#% increased Cooldown Recovery Rate for throwing Traps",
         "bounds": [{"min": 10, "max": 15}]
       },
       {
@@ -16640,7 +16640,7 @@
         "bounds": [{"min": 0.2, "max": 0.2}]
       },
       {
-        "text": "You can apply an additional Curse",
+        "text": "You can apply one fewer Curse",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
@@ -17090,7 +17090,7 @@
         "bounds": [{"min": 10, "max": 20}]
       },
       {
-        "text": "You can apply an additional Curse",
+        "text": "You can apply one fewer Curse",
         "bounds": [{"min": 1, "max": 1}]
       }
     ]
@@ -17118,11 +17118,11 @@
         "bounds": [{"min": 10, "max": 20}]
       },
       {
-        "text": "You can apply an additional Curse",
+        "text": "You can apply one fewer Curse",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "#% increased Area of Effect of Curse Skills",
+        "text": "#% increased Area of Effect of Hex Skills",
         "bounds": [{"min": 60, "max": 60}]
       }
     ]
@@ -17335,7 +17335,7 @@
         "bounds": [{"min": 25, "max": 35}]
       },
       {
-        "text": "#% chance to Curse non-Cursed Enemies with a random Curse on Hit",
+        "text": "#% chance to Curse non-Cursed Enemies with a random Hex on Hit",
         "bounds": [{"min": 20, "max": 20}]
       }
     ]
@@ -18689,7 +18689,7 @@
         "bounds": [{"min": 1, "max": 1}]
       },
       {
-        "text": "Gain 1 Fragile Regrowth each second",
+        "text": "Gain # Fragile Regrowth each second ",
         "bounds": [{"min": 1, "max": 1}]
       }
     ]
@@ -19251,11 +19251,11 @@
     "props": {},
     "stats": [
       {
-        "text": "Golem Skills have #% increased Cooldown Recovery Speed",
+        "text": "Golem Skills have #% increased Cooldown Recovery Rate",
         "bounds": [{"min": 20, "max": 30}]
       },
       {
-        "text": "Golems have #% increased Cooldown Recovery Speed",
+        "text": "Summoned Golems have #% increased Cooldown Recovery Rate",
         "bounds": [{"min": 30, "max": 45}]
       },
       {
@@ -20086,7 +20086,7 @@
         "bounds": [{"min": 10, "max": 15}]
       },
       {
-        "text": "With at least 40 Intelligence in Radius, Raised\nZombies' Slam Attack has #% increased Cooldown Recovery Speed",
+        "text": "With at least 40 Intelligence in Radius, Raised\nZombies' Slam Attack has #% increased Cooldown Recovery Rate",
         "bounds": [{"min": 100, "max": 100}]
       },
       {
@@ -20320,7 +20320,7 @@
         "bounds": [{"min": 30, "max": 50}]
       },
       {
-        "text": "#% increased Shock Duration on Enemies",
+        "text": "#% increased Duration of Lightning Ailments",
         "bounds": [{"min": 100, "max": 100}]
       },
       {
@@ -20576,16 +20576,16 @@
         "bounds": [{"min": 2, "max": 2}]
       },
       {
-        "text": "Socketed Gems are Supported by Level 10 Intensify",
-        "bounds": [{"min": 1, "max": 1}]
+        "text": "Socketed Gems are Supported by Level # Intensify",
+        "bounds": [{"min": 10, "max": 10}]
       },
       {
-        "text": "Socketed Gems are Supported by Level 10 Spell Echo",
-        "bounds": [{"min": 1, "max": 1}]
+        "text": "Socketed Gems are Supported by Level # Spell Echo",
+        "bounds": [{"min": 10, "max": 10}]
       },
       {
-        "text": "Socketed Gems are Supported by Level 10 Controlled Destruction",
-        "bounds": [{"min": 1, "max": 1}]
+        "text": "Socketed Gems are Supported by Level # Controlled Destruction",
+        "bounds": [{"min": 10, "max": 10}]
       },
       {
         "text": "# to Intelligence",
@@ -22296,8 +22296,8 @@
         "bounds": [{"min": 5, "max": 5}]
       },
       {
-        "text": "Curse Enemies with Level # Flammability on Hit",
-        "bounds": [{"min": 10, "max": 10}]
+        "text": "Curse Enemies with Flammability on Hit, with #% increased Effect",
+        "bounds": [{"min": 40, "max": 40}]
       }
     ]
   },
@@ -22522,7 +22522,7 @@
         "bounds": [{"min": 18, "max": 18}]
       },
       {
-        "text": "#% increased Area of Effect of Curse Skills",
+        "text": "#% increased Area of Effect of Hex Skills",
         "bounds": [{"min": 18, "max": 18}]
       },
       {
@@ -25720,8 +25720,8 @@
         "bounds": [{"min": 2, "max": 2}]
       },
       {
-        "text": "Socketed Gems are Supported by Level 10 Spell Echo",
-        "bounds": [{"min": 1, "max": 1}]
+        "text": "Socketed Gems are Supported by Level # Spell Echo",
+        "bounds": [{"min": 10, "max": 10}]
       },
       {
         "text": "# to Intelligence",
@@ -26774,7 +26774,7 @@
       },
       {
         "text": "Regenerate # Life per second",
-        "bounds": [{"min": 10, "max": 10}]
+        "bounds": [{"min": 20, "max": 20}]
       },
       {
         "text": "#% of Physical Attack Damage Leeched as Life",
@@ -26818,7 +26818,7 @@
         "bounds": [{"min": 22, "max": 44}]
       },
       {
-        "text": "Curse Enemies with Level 5 Vulnerability on Block",
+        "text": "Curse Enemies with Vulnerability on Block, with 20% increased Effect",
         "bounds": [{"min": 5, "max": 5}]
       }
     ]
@@ -28265,7 +28265,7 @@
         "bounds": [{"min": -15, "max": -15}]
       },
       {
-        "text": "#% chance to Curse Enemies with Level 10 Vulnerability on Hit",
+        "text": "#% chance to Curse Enemies with Vulnerability on Hit, with 40% increased Effect",
         "bounds": [{"min": 25, "max": 25}]
       },
       {
@@ -29250,7 +29250,7 @@
       },
       {
         "text": "Socketed Gems are Supported by Level # Elemental Penetration",
-        "bounds": [{"min": 20, "max": 20}]
+        "bounds": [{"min": 25, "max": 25}]
       },
       {
         "text": "#% chance to Trigger Level 20 Shade Form when you Use a Socketed Skill",
@@ -29408,7 +29408,11 @@
         "bounds": [{"min": 10, "max": 10}]
       },
       {
-        "text": "Cannot be Blinded",
+        "text": "Blind does not affect your Chance to Hit",
+        "bounds": [{"min": 1, "max": 1}]
+      },
+      {
+        "text": "Enemies Blinded by you while you are Blinded have Malediction",
         "bounds": [{"min": 1, "max": 1}]
       },
       {
@@ -31737,6 +31741,11 @@
         "variant": true
       },
       {
+        "text": "Corrupted Soul",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
         "text": "Crimson Dance",
         "bounds": [{"min": 1, "max": 1}],
         "variant": true
@@ -31768,6 +31777,11 @@
       },
       {
         "text": "Glancing Blows",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Hollow Palm Technique",
         "bounds": [{"min": 1, "max": 1}],
         "variant": true
       },
@@ -31897,18 +31911,476 @@
         "bounds": [{"min": 4, "max": 6}]
       },
       {
+        "text": "#% of Fire Damage Leeched as Life while affected by Anger",
+        "bounds": [{"min": 1, "max": 1.5}],
+        "variant": true
+      },
+      {
+        "text": "Damage Penetrates #% Fire Resistance while affected by Anger ",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "#% to Critical Strike Multiplier while affected by Anger",
+        "bounds": [{"min": 30, "max": 50}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Fire Damage while affected by Anger",
+        "bounds": [{"min": 40, "max": 60}],
+        "variant": true
+      },
+      {
+        "text": "Gain #% of Physical Damage as Extra Fire Damage while affected by Anger",
+        "bounds": [{"min": 15, "max": 25}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage Converted to Fire Damage while affected by Anger",
+        "bounds": [{"min": 25, "max": 40}],
+        "variant": true
+      },
+      {
+        "text": "#% of Damage taken from Mana before Life while affected by Clarity",
+        "bounds": [{"min": 6, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "#% of Damage taken gained as Mana over 4 seconds when Hit while affected by Clarity",
+        "bounds": [{"min": 15, "max": 20}],
+        "variant": true
+      },
+      {
+        "text": "Gain #% of Maximum Mana as Extra Maximum Energy Shield while affected by Clarity",
+        "bounds": [{"min": 6, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Mana Recovery Rate while affected by Clarity",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "#% chance to Recover 10% of Mana when you use a Skill while affected by Clarity",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "# to Total Mana Cost of Skills while affected by Clarity",
+        "bounds": [{"min": -10, "max": -5}],
+        "variant": true
+      },
+      {
+        "text": "Non-Channelling Skills have # to Total Mana Cost while affected by Clarity",
+        "bounds": [{"min": -10, "max": -5}],
+        "variant": true
+      },
+      {
+        "text": "# to Armour while affected by Determination",
+        "bounds": [{"min": 600, "max": 1000}],
+        "variant": true
+      },
+      {
+        "text": "#% Chance to Block Attack Damage while affected by Determination",
+        "bounds": [{"min": 5, "max": 8}],
+        "variant": true
+      },
+      {
         "text": "#% additional Physical Damage Reduction while affected by Determination",
-        "bounds": [{"min": 4, "max": 6}],
+        "bounds": [{"min": 5, "max": 8}],
+        "variant": true
+      },
+      {
+        "text": "You take #% reduced Extra Damage from Critical Strikes while affected by Determination",
+        "bounds": [{"min": -60, "max": -40}],
+        "variant": true
+      },
+      {
+        "text": "#% reduced Reflected Physical Damage taken while affected by Determination",
+        "bounds": [{"min": -50, "max": -40}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Vulnerability while affected by Determination",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% Chance to Block Spell Damage while affected by Discipline",
+        "bounds": [{"min": 5, "max": 8}],
+        "variant": true
+      },
+      {
+        "text": "# Energy Shield gained for each Enemy Hit while affected by Discipline",
+        "bounds": [{"min": 20, "max": 30}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Energy Shield Recovery Rate while affected by Discipline",
+        "bounds": [{"min": 10, "max": 15}],
         "variant": true
       },
       {
         "text": "Regenerate #% of Energy Shield per Second while affected by Discipline",
-        "bounds": [{"min": 1.2, "max": 2.2}],
+        "bounds": [{"min": 1.5, "max": 2.5}],
+        "variant": true
+      },
+      {
+        "text": "#% faster start of Energy Shield Recharge while affected by Discipline",
+        "bounds": [{"min": 30, "max": 40}],
         "variant": true
       },
       {
         "text": "#% chance to Evade Attack Hits while affected by Grace",
-        "bounds": [{"min": 4, "max": 6}],
+        "bounds": [{"min": 5, "max": 8}],
+        "variant": true
+      },
+      {
+        "text": "#% chance to Blind Enemies which Hit you while affected by Grace",
+        "bounds": [{"min": 30, "max": 50}],
+        "variant": true
+      },
+      {
+        "text": "#% chance to Dodge Attack Hits while affected by Grace",
+        "bounds": [{"min": 6, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Movement Speed while affected by Grace",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Enfeeble while affected by Grace",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% chance to Dodge Spell Hits while affected by Haste",
+        "bounds": [{"min": 5, "max": 8}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Cooldown Recovery Rate of Movement Skills used while affected by Haste",
+        "bounds": [{"min": 30, "max": 50}],
+        "variant": true
+      },
+      {
+        "text": "Debuffs on you expire #% faster while affected by Haste",
+        "bounds": [{"min": -20, "max": -15}],
+        "variant": true
+      },
+      {
+        "text": "You gain Onslaught for # seconds on Kill while affected by Haste",
+        "bounds": [{"min": 4, "max": 4}],
+        "variant": true
+      },
+      {
+        "text": "You have Phasing while affected by Haste",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Temporal Chains while affected by Haste",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Adds # to # Cold Damage while affected by Hatred",
+        "bounds": [
+          {"min": 58, "max": 70},
+          {"min": 88, "max": 104}
+        ],
+        "variant": true
+      },
+      {
+        "text": "#% to Critical Strike Chance while affected by Hatred",
+        "bounds": [{"min": 1.2, "max": 1.8}],
+        "variant": true
+      },
+      {
+        "text": "Damage Penetrates #% Cold Resistance while affected by Hatred",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Cold Damage while affected by Hatred",
+        "bounds": [{"min": 40, "max": 60}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage Converted to Cold Damage while affected by Hatred",
+        "bounds": [{"min": 25, "max": 40}],
+        "variant": true
+      },
+      {
+        "text": "#% to Damage over Time Multiplier while affected by Malevolence",
+        "bounds": [{"min": 18, "max": 22}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Recovery rate of Life and Energy Shield while affected by Malevolence",
+        "bounds": [{"min": 8, "max": 12}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Bleeding while affected by Malevolence",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Poison while affected by Malevolence",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Damaging Ailments you inflict deal Damage #% faster while affected by Malevolence",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "Cannot be Blinded while affected by Precision",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Gain a Flask Charge when you deal a Critical Strike while affected by Precision",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Attack Damage while affected by Precision",
+        "bounds": [{"min": 40, "max": 60}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Attack Speed while affected by Precision",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "#% to Critical Strike Multiplier while affected by Precision",
+        "bounds": [{"min": 20, "max": 30}],
+        "variant": true
+      },
+      {
+        "text": "#% chance to deal Double Damage while using Pride",
+        "bounds": [{"min": 8, "max": 12}],
+        "variant": true
+      },
+      {
+        "text": "#% chance to Impale Enemies on Hit with Attacks while using Pride",
+        "bounds": [{"min": 25, "max": 25}],
+        "variant": true
+      },
+      {
+        "text": "Impales you inflict last # additional Hits while using Pride",
+        "bounds": [{"min": 2, "max": 2}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Attack Physical Damage while using Pride",
+        "bounds": [{"min": 40, "max": 60}],
+        "variant": true
+      },
+      {
+        "text": "Your Hits Intimidate Enemies for 4 seconds while you are using Pride",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% to Chaos Resistance while affected by Purity of Elements",
+        "bounds": [{"min": 30, "max": 50}],
+        "variant": true
+      },
+      {
+        "text": "#% reduced Reflected Elemental Damage taken while affected by Purity of Elements",
+        "bounds": [{"min": -50, "max": -40}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage from Hits taken as Cold Damage while affected by Purity of Elements",
+        "bounds": [{"min": 8, "max": 12}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage from Hits taken as Fire Damage while affected by Purity of Elements",
+        "bounds": [{"min": 8, "max": 12}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage from Hits taken as Lightning Damage while affected by Purity of Elements",
+        "bounds": [{"min": 8, "max": 12}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Elemental Weakness while affected by Purity of Elements",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Immune to Ignite while affected by Purity of Fire",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage from Hits taken as Fire Damage while affected by Purity of Fire",
+        "bounds": [{"min": 6, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Burning Ground while affected by Purity of Fire",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Flammability while affected by Purity of Fire",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Immune to Freeze while affected by Purity of Ice",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage from Hits taken as Cold Damage while affected by Purity of Ice",
+        "bounds": [{"min": 6, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Chilled Ground while affected by Purity of Ice",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Frostbite while affected by Purity of Ice",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Immune to Shock while affected by Purity of Lightning",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage from Hits taken as Lightning Damage while affected by Purity of Lightning",
+        "bounds": [{"min": 6, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Conductivity while affected by Purity of Lightning",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "Unaffected by Shocked Ground while affected by Purity of Lightning",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% of Damage leeched as Life while affected by Vitality",
+        "bounds": [{"min": 0.8, "max": 1.2}],
+        "variant": true
+      },
+      {
+        "text": "Regenerate # Life per Second while affected by Vitality",
+        "bounds": [{"min": 100, "max": 140}],
+        "variant": true
+      },
+      {
+        "text": "# Life gained for each Enemy Hit while affected by Vitality",
+        "bounds": [{"min": 20, "max": 30}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Life Recovery from Flasks while affected by Vitality",
+        "bounds": [{"min": 50, "max": 70}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Life Recovery Rate while affected by Vitality",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "Regenerate #% of Life per second while while affected by Vitality",
+        "bounds": [{"min": 1, "max": 1.5}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Critical Strike Chance while affected by Wrath",
+        "bounds": [{"min": 70, "max": 100}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Lightning Damage while affected by Wrath",
+        "bounds": [{"min": 40, "max": 60}],
+        "variant": true
+      },
+      {
+        "text": "#% of Lightning Damage is Leeched as Energy Shield while affected by Wrath",
+        "bounds": [{"min": 1, "max": 1.5}],
+        "variant": true
+      },
+      {
+        "text": "#% of Lightning Damage is Leeched as Mana while affected by Wrath",
+        "bounds": [{"min": 1, "max": 1.5}],
+        "variant": true
+      },
+      {
+        "text": "Damage Penetrates #% Lightning Resistance while affected by Wrath",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "Gain #% of Physical Damage as Extra Lightning Damage while affected by Wrath",
+        "bounds": [{"min": 15, "max": 25}],
+        "variant": true
+      },
+      {
+        "text": "#% of Physical Damage Converted to Lightning Damage while affected by Wrath",
+        "bounds": [{"min": 25, "max": 40}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Cast Speed while affected by Zealotry",
+        "bounds": [{"min": 10, "max": 15}],
+        "variant": true
+      },
+      {
+        "text": "Effects of Consecrated Ground you create while affected by Zealotry Linger for # seconds",
+        "bounds": [{"min": 2, "max": 2}],
+        "variant": true
+      },
+      {
+        "text": "Consecrated Ground you create while affected by Zealotry causes enemies to take #% increased Damage",
+        "bounds": [{"min": 8, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Critical Strike Chance against Enemies on Consecrated Ground while affected by Zealotry",
+        "bounds": [{"min": 100, "max": 120}],
+        "variant": true
+      },
+      {
+        "text": "Critical Strikes Penetrate #% of Enemy Elemental Resistances while affected by Zealotry",
+        "bounds": [{"min": 8, "max": 10}],
+        "variant": true
+      },
+      {
+        "text": "Gain Arcane Surge for 4 seconds when you create Consecrated Ground while affected by Zealotry",
+        "bounds": [{"min": 1, "max": 1}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Maximum total Recovery per second from Energy Shield Leech while affected by Zealotry",
+        "bounds": [{"min": 30, "max": 30}],
+        "variant": true
+      },
+      {
+        "text": "#% increased Maximum total Recovery per second from Energy Shield Leech while affected by Zealotry",
+        "bounds": [{"min": 30, "max": 30}],
         "variant": true
       }
     ]
@@ -32230,7 +32702,7 @@
       },
       {
         "text": "# to maximum Life",
-        "bounds": [{"min": 50, "max": 70}]
+        "bounds": [{"min": 60, "max": 70}]
       },
       {
         "text": "#% increased Movement Speed",
@@ -32289,7 +32761,7 @@
       },
       {
         "text": "# to maximum Life",
-        "bounds": [{"min": 50, "max": 70}]
+        "bounds": [{"min": 60, "max": 70}]
       },
       {
         "text": "#% increased Movement Speed",
@@ -32348,7 +32820,7 @@
       },
       {
         "text": "# to maximum Life",
-        "bounds": [{"min": 50, "max": 70}]
+        "bounds": [{"min": 60, "max": 70}]
       },
       {
         "text": "#% increased Movement Speed",
@@ -32570,6 +33042,11 @@
         "variant": true
       },
       {
+        "text": "Socketed Gems are Supported by Level # Awakened Blasphemy",
+        "bounds": [{"min": 5, "max": 5}],
+        "variant": true
+      },
+      {
         "text": "Socketed Gems are Supported by Level # Awakened Brutality",
         "bounds": [{"min": 5, "max": 5}],
         "variant": true
@@ -32750,7 +33227,7 @@
         "variant": true
       },
       {
-        "text": "Socketed Gems are Supported by Level # Curse On Hit",
+        "text": "Socketed Gems are Supported by Level # Hextouch",
         "bounds": [{"min": 20, "max": 20}],
         "variant": true
       },
@@ -32760,7 +33237,7 @@
         "variant": true
       },
       {
-        "text": "Socketed Gems are Supported by Level # Deathmark",
+        "text": "Socketed Gems are Supported by Level # Predator",
         "bounds": [{"min": 20, "max": 20}],
         "variant": true
       },
@@ -32776,6 +33253,11 @@
       },
       {
         "text": "Socketed Gems are Supported by Level # Elemental Focus",
+        "bounds": [{"min": 20, "max": 20}],
+        "variant": true
+      },
+      {
+        "text": "Socketed Gems are Supported by Level # Elemental Penetration",
         "bounds": [{"min": 20, "max": 20}],
         "variant": true
       },
@@ -32896,6 +33378,11 @@
       },
       {
         "text": "Socketed Gems are Supported by Level # Impale",
+        "bounds": [{"min": 20, "max": 20}],
+        "variant": true
+      },
+      {
+        "text": "Socketed Gems are Supported by Level # Impending Doom",
         "bounds": [{"min": 20, "max": 20}],
         "variant": true
       },
@@ -33086,6 +33573,11 @@
       },
       {
         "text": "Socketed Gems are supported by Level # Pierce",
+        "bounds": [{"min": 20, "max": 20}],
+        "variant": true
+      },
+      {
+        "text": "Socketed Gems are Supported by Level # Pinpoint",
         "bounds": [{"min": 20, "max": 20}],
         "variant": true
       },
@@ -33310,7 +33802,7 @@
         "bounds": [{"min": 20, "max": 20}]
       },
       {
-        "text": "Grants Level # Summon Doedre's Effigy Skill\nSocketed Curses are Triggered by Doedre's Effigy when Summoned\nSocketed Curses ignore Curse Limit",
+        "text": "Grants Level # Summon Doedre's Effigy Skill\nSocketed Hex Curse Skills are Triggered by Doedre's Effigy when Summoned\nHexes from Socketed Skills ignore Curse Limit",
         "bounds": [{"min": 20, "max": 20}]
       },
       {

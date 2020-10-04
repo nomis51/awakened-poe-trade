@@ -34,7 +34,14 @@ export const CATEGORY_TO_TRADE_ID = new Map([
   [ItemCategory.TwoHandedSword, 'weapon.twosword'],
   [ItemCategory.Wand, 'weapon.wand'],
   [ItemCategory.Warstaff, 'weapon.warstaff'],
-  [ItemCategory.ClusterJewel, 'jewel.cluster']
+  [ItemCategory.ClusterJewel, 'jewel.cluster'],
+  [ItemCategory.HeistBlueprint, 'heistmission.blueprint'],
+  [ItemCategory.HeistContract, 'heistmission.contract'],
+  [ItemCategory.HeistTool, 'heistequipment.heisttool'],
+  [ItemCategory.HeistBrooch, 'heistequipment.heistreward'],
+  [ItemCategory.HeistGear, 'heistequipment.heistweapon'],
+  [ItemCategory.HeistCloak, 'heistequipment.heistutility'],
+  [ItemCategory.Trinket, 'accessory.trinket']
 ])
 
 type FilterBoolean = { option?: 'true' | 'false' }
@@ -46,7 +53,7 @@ interface TradeRequest { /* eslint-disable camelcase */
     name?: string | { discriminator: string, option: string }
     type?: string | { discriminator: string, option: string }
     stats: Array<{
-      type: 'and' | 'if' | 'count',
+      type: 'and' | 'if' | 'count' | 'not',
       value?: FilterRange
       filters: Array<{
         id: string
@@ -91,6 +98,8 @@ interface TradeRequest { /* eslint-disable camelcase */
           elder_item?: FilterBoolean
           redeemer_item?: FilterBoolean
           warlord_item?: FilterBoolean
+          stack_size?: FilterRange
+          gem_alternate_quality?: { option: '0' | '1' | '2' | '3' }
         }
       }
       armour_filters?: {
@@ -114,6 +123,20 @@ interface TradeRequest { /* eslint-disable camelcase */
         filters: {
           map_tier?: FilterRange
           map_blighted?: FilterBoolean
+        }
+      }
+      heist_filters?: {
+        filters: {
+          area_level?: FilterRange
+          heist_agility?: FilterRange
+          heist_brute_force?: FilterRange
+          heist_counter_thaumaturgy?: FilterRange
+          heist_deception?: FilterRange
+          heist_demolition?: FilterRange
+          heist_engineering?: FilterRange
+          heist_lockpicking?: FilterRange
+          heist_perception?: FilterRange
+          heist_trap_disarmament?: FilterRange
         }
       }
       trade_filters: {
@@ -173,7 +196,9 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[], i
   const body: TradeRequest = {
     query: {
       status: { option: filters.trade.offline ? 'any' : 'online' },
-      stats: [],
+      stats: [
+        { type: 'and', filters: [] }
+      ],
       filters: {
         trade_filters: {
           filters: {
@@ -234,6 +259,10 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[], i
     prop.set(query.filters, 'misc_filters.filters.ilvl.min', filters.itemLevel.value)
   }
 
+  if (filters.stackSize && !filters.stackSize.disabled) {
+    prop.set(query.filters, 'misc_filters.filters.stack_size.min', filters.stackSize.value)
+  }
+
   if (filters.linkedSockets && !filters.linkedSockets.disabled) {
     prop.set(query.filters, 'socket_filters.filters.links.min', filters.linkedSockets.value)
   }
@@ -253,6 +282,59 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[], i
 
   if (filters.unidentified && !filters.unidentified.disabled) {
     prop.set(query.filters, 'misc_filters.filters.identified.option', String(false))
+  }
+
+  if (filters.altQuality && !filters.altQuality.disabled) {
+    switch (filters.altQuality.value) {
+      case 'Superior':
+        prop.set(query.filters, 'misc_filters.filters.gem_alternate_quality.option', '0')
+        break
+      case 'Anomalous':
+        prop.set(query.filters, 'misc_filters.filters.gem_alternate_quality.option', '1')
+        break
+      case 'Divergent':
+        prop.set(query.filters, 'misc_filters.filters.gem_alternate_quality.option', '2')
+        break
+      case 'Phantasmal':
+        prop.set(query.filters, 'misc_filters.filters.gem_alternate_quality.option', '3')
+        break
+    }
+  }
+
+  if (filters.areaLevel) {
+    prop.set(query.filters, 'heist_filters.filters.area_level.min', filters.areaLevel.value)
+  }
+
+  if (filters.heistJob) {
+    switch (filters.heistJob.name) {
+      case 'Agility':
+        prop.set(query.filters, 'heist_filters.filters.heist_agility.min', filters.heistJob.level)
+        break
+      case 'Brute Force':
+        prop.set(query.filters, 'heist_filters.filters.heist_brute_force.min', filters.heistJob.level)
+        break
+      case 'Counter-Thaumaturgy':
+        prop.set(query.filters, 'heist_filters.filters.heist_counter_thaumaturgy.min', filters.heistJob.level)
+        break
+      case 'Deception':
+        prop.set(query.filters, 'heist_filters.filters.heist_deception.min', filters.heistJob.level)
+        break
+      case 'Demolition':
+        prop.set(query.filters, 'heist_filters.filters.heist_demolition.min', filters.heistJob.level)
+        break
+      case 'Engineering':
+        prop.set(query.filters, 'heist_filters.filters.heist_engineering.min', filters.heistJob.level)
+        break
+      case 'Lockpicking':
+        prop.set(query.filters, 'heist_filters.filters.heist_lockpicking.min', filters.heistJob.level)
+        break
+      case 'Perception':
+        prop.set(query.filters, 'heist_filters.filters.heist_perception.min', filters.heistJob.level)
+        break
+      case 'Trap Disarmament':
+        prop.set(query.filters, 'heist_filters.filters.heist_trap_disarmament.min', filters.heistJob.level)
+        break
+    }
   }
 
   if (filters.influences) {
@@ -283,6 +365,16 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[], i
   }
 
   for (const stat of stats) {
+    if (stat.tradeId[0] === 'map.no_elder_guardian') {
+      query.stats.push({
+        type: 'not',
+        disabled: stat.disabled,
+        filters: [
+          tradeIdToQuery(STAT_BY_REF.get('Map is occupied by #')!.types[0].tradeId[0], stat)
+        ]
+      })
+    }
+
     if (stat.disabled) continue
 
     switch (stat.tradeId[0] as INTERNAL_TRADE_ID) {
@@ -331,6 +423,7 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[], i
     for (const statRef of refs) {
       stats.push({
         disabled: filters.veiled.disabled,
+        statRef: undefined!,
         text: undefined!,
         type: undefined!,
         min: undefined,
@@ -340,29 +433,16 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[], i
     }
   }
 
-  query.stats.push({ type: 'and', filters: [] })
+  const qAnd = query.stats[0]
   for (const stat of stats) {
     if (stat.tradeId.length === 1) {
-      query.stats[0]!.filters.push({
-        id: stat.tradeId[0],
-        value: {
-          ...getMinMax(stat),
-          option: stat.option != null ? stat.option.tradeId : undefined
-        },
-        disabled: stat.disabled
-      })
+      qAnd.filters.push(tradeIdToQuery(stat.tradeId[0], stat))
     } else {
       query.stats.push({
         type: 'count',
         value: { min: 1 },
         disabled: stat.disabled,
-        filters: stat.tradeId.map(id => ({
-          id,
-          value: {
-            ...getMinMax(stat),
-            option: stat.option != null ? stat.option.tradeId : undefined
-          }
-        }))
+        filters: stat.tradeId.map(id => tradeIdToQuery(id, stat))
       })
     }
   }
@@ -428,6 +508,17 @@ function getMinMax (stat: StatFilter) {
   const b = typeof stat.max === 'number' ? stat.max * sign : undefined
 
   return !stat.invert ? { min: a, max: b } : { min: b, max: a }
+}
+
+function tradeIdToQuery (id: string, stat: StatFilter) {
+  return {
+    id,
+    value: {
+      ...getMinMax(stat),
+      option: stat.option != null ? stat.option.tradeId : undefined
+    },
+    disabled: stat.disabled
+  }
 }
 
 function nameToQuery (name: string, filters: ItemFilters, translate: boolean) {

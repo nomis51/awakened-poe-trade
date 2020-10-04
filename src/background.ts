@@ -19,6 +19,7 @@ import { setupBuiltinBrowser } from './main/builtin-browser'
 import { createFileProtocol } from './main/app-file-protocol'
 import TradeManager from './main/trade-manager';
 import './main/trade-manager/String.TextBetween';
+import { LogWatcher } from './main/LogWatcher'
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 if (!app.requestSingleInstanceLock()) {
@@ -30,6 +31,9 @@ app.allowRendererProcessReuse = true
 if (!config.get('hardwareAcceleration')) {
   app.disableHardwareAcceleration()
 }
+
+// @TODO: remove after resolved https://github.com/electron/electron/issues/23664
+app.commandLine.appendSwitch('disable-features', 'OutOfBlinkCors')
 
 app.on('ready', async () => {
   logger.info('App is running', {
@@ -70,6 +74,7 @@ app.on('ready', async () => {
       setupShortcuts()
       setupAltVisibility()
       TradeManager.start();
+      LogWatcher.start()
     },
     // fixes(linux): window is black instead of transparent
     process.platform === 'linux' ? 1000 : 0

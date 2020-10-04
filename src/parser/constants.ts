@@ -31,6 +31,7 @@ export const TAG_GEM_LEVEL = 'Level: '
 export const TAG_STACK_SIZE = 'Stack Size: '
 export const TAG_SOCKETS = 'Sockets: '
 export const TAG_QUALITY = 'Quality: '
+export const TAG_AREA_LEVEL = 'Area Level: '
 
 export const TAG_PHYSICAL_DAMAGE = 'Physical Damage: '
 export const TAG_ELEMENTAL_DAMAGE = 'Elemental Damage: '
@@ -77,3 +78,11 @@ export const PROPHECY_EINHAR = 'You will find Einhar and complete his mission.'
 export const PROPHECY_NIKO = 'You will find Niko and complete his mission.'
 export const PROPHECY_JUN = 'You will find Jun and complete her mission.'
 export const PROPHECY_ZANA = 'You will find Zana and complete her mission.'
+
+export const CANNOT_USE_ITEM = 'You cannot use this item. Its stats will be ignored'
+
+export const QUALITY_ANOMALOUS = '/^Anomalous (.*)$/'
+export const QUALITY_DIVERGENT = '/^Divergent (.*)$/'
+export const QUALITY_PHANTASMAL = '/^Phantasmal (.*)$/'
+
+export const HEIST_JOB = '/^Requires (.+) \\(Level (\\d+)\\)$/'

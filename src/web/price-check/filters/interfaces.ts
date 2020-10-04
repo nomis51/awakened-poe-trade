@@ -1,5 +1,6 @@
-import { ItemInfluence, ItemCategory } from '@/parser'
-import { ItemModifier } from '@/parser/modifiers'
+import type { ItemInfluence, ItemCategory } from '@/parser'
+import type { ItemModifier } from '@/parser/modifiers'
+import type { HeistJob, ParsedItem } from '@/parser/ParsedItem'
 
 export interface ItemFilters {
   name?: {
@@ -51,6 +52,10 @@ export interface ItemFilters {
     value: number
     disabled: boolean
   }
+  stackSize?: {
+    value: number
+    disabled: boolean
+  }
   unidentified?: {
     value: true
     disabled: boolean
@@ -58,6 +63,17 @@ export interface ItemFilters {
   veiled?: {
     stat: string
     disabled: boolean
+  }
+  altQuality?: {
+    value: NonNullable<ParsedItem['extra']['altQuality']>
+    disabled: boolean
+  }
+  areaLevel?: {
+    value: number
+  }
+  heistJob?: {
+    name: HeistJob
+    level: number
   }
   trade: {
     offline: boolean
@@ -68,6 +84,7 @@ export interface ItemFilters {
 
 export interface StatFilter {
   readonly tradeId: string[]
+  readonly statRef: string
   readonly text: string
   readonly roll?: number
   readonly type: string
@@ -93,7 +110,8 @@ export type INTERNAL_TRADE_ID =
   'weapon.physical_dps' |
   'weapon.elemental_dps' |
   'weapon.crit' |
-  'weapon.aps'
+  'weapon.aps' |
+  'map.no_elder_guardian'
 
 export const INTERNAL_TRADE_ID = [
   'armour.armour',
@@ -104,5 +122,6 @@ export const INTERNAL_TRADE_ID = [
   'weapon.physical_dps',
   'weapon.elemental_dps',
   'weapon.crit',
-  'weapon.aps'
+  'weapon.aps',
+  'map.no_elder_guardian'
 ]

@@ -1,19 +1,23 @@
 <template>
   <div>
-    <div class="flex flex-wrap items-center mb-2 -m-1">
+    <div class="flex flex-wrap items-center mb-2 -m-1" @mouseleave="handleMouseLeaveStats">
       <button v-if="filters.linkedSockets" class="trade-tag" :class="{ disabled: filters.linkedSockets.disabled }"
         @click="filters.linkedSockets.disabled = !filters.linkedSockets.disabled">{{ $t('Links: {0}', [filters.linkedSockets.value]) }}</button>
       <div v-if="filters.mapTier" class="trade-tag">{{ $t('Map Tier: {0}', [filters.mapTier.value]) }}</div>
+      <div v-if="filters.areaLevel" class="trade-tag">{{ $t('Area Level: {0}', [filters.areaLevel.value]) }}</div>
+      <div v-if="filters.heistJob" class="trade-tag">{{ $t(`${filters.heistJob.name} (lvl {0})`, [filters.heistJob.level]) }}</div>
       <div v-if="filters.mapBlighted" class="trade-tag">{{ $t('Blighted') }}</div>
       <div v-if="filters.discriminator" class="trade-tag">{{ $t(filters.discriminator.value) }}</div>
-      <button v-if="filters.itemLevel" class="trade-tag" :class="{ disabled: filters.itemLevel.disabled }"
-        @click="filters.itemLevel.disabled = !filters.itemLevel.disabled">{{ $t('Item Level: {0}', [filters.itemLevel.value]) }}</button>
+      <filter-numeric-editable :filter="filters.itemLevel" name="Item Level:" />
+      <filter-numeric-editable :filter="filters.stackSize" name="Stock:" />
       <button v-if="filters.whiteSockets" class="trade-tag" :class="{ disabled: filters.whiteSockets.disabled }"
         @click="filters.whiteSockets.disabled = !filters.whiteSockets.disabled">{{ $t('White: {0}', [filters.whiteSockets.value]) }}</button>
       <button v-if="filters.gemLevel" class="trade-tag" :class="{ disabled: filters.gemLevel.disabled }"
         @click="filters.gemLevel.disabled = !filters.gemLevel.disabled">{{ $t('Level: {0}', [filters.gemLevel.min]) }}</button>
       <button v-if="filters.quality" class="trade-tag" :class="{ disabled: filters.quality.disabled }"
         @click="filters.quality.disabled = !filters.quality.disabled">{{ $t('Quality: {0}%', [filters.quality.value]) }}</button>
+      <button v-if="filters.altQuality" class="trade-tag" :class="{ disabled: filters.altQuality.disabled }"
+        @click="filters.altQuality.disabled = !filters.altQuality.disabled">{{ $t(filters.altQuality.value) }}</button>
       <template v-if="filters.influences">
         <button v-for="influence of filters.influences" :key="influence.value" class="trade-tag flex items-center"
           :class="{ disabled: influence.disabled }"
@@ -78,12 +82,14 @@
 <script>
 import FilterModifier from './FilterModifier'
 import FilterVeiled from './FilterVeiled'
+import FilterNumericEditable from './FilterNumericEditable'
 
 export default {
   name: 'FiltersBlock',
   components: {
     FilterModifier,
-    FilterVeiled
+    FilterVeiled,
+    FilterNumericEditable
   },
   props: {
     filters: {
@@ -133,6 +139,9 @@ export default {
       // ignore if mouse moves to filters block
       if (e.offsetY > 0) {
         this.handleStatsSubmit()
+        if (document.activeElement) {
+          document.activeElement.blur()
+        }
       }
     }
   }
@@ -149,6 +158,10 @@ export default {
     @apply border-gray-900;
   }
 }
+
+.trade-tag--box {
+  padding: 0;
+}
 </style>
 
 <i18n>
@@ -159,7 +172,6 @@ export default {
     "Links: {0}": "Связи: {0}",
     "Map Tier: {0}": "Ур. карты: {0}",
     "Blighted": "Заражённая",
-    "Item Level: {0}": "Ур. предмета: {0}",
     "White: {0}": "Белые: {0}",
     "Level: {0}": "Уровень: {0}",
     "Quality: {0}%": "Качество: {0}%",
@@ -176,7 +188,21 @@ export default {
     "Einhar": "Эйнар",
     "Niko": "Нико",
     "Jun": "Джун",
-    "Zana": "Зана"
+    "Zana": "Зана",
+    "Superior": "Высокого к-ва",
+    "Anomalous": "Аномальный",
+    "Divergent": "Искривлённый",
+    "Phantasmal": "Фантомный",
+    "Area Level: {0}": "Ур. области: {0}",
+    "Lockpicking (lvl {0})": "Взлом ({0} ур.)",
+    "Counter-Thaumaturgy (lvl {0})": "Контрмагия ({0} ур.)",
+    "Perception (lvl {0})": "Восприятие ({0} ур.)",
+    "Deception (lvl {0})": "Маскировка ({0} ур.)",
+    "Agility (lvl {0})": "Проворство ({0} ур.)",
+    "Engineering (lvl {0})": "Инженерное дело ({0} ур.)",
+    "Trap Disarmament (lvl {0})": "Разминирование ({0} ур.)",
+    "Demolition (lvl {0})": "Взрывное дело ({0} ур.)",
+    "Brute Force (lvl {0})": "Грубая сила ({0} ур.)"
   }
 }
 </i18n>

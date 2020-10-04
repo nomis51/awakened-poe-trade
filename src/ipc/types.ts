@@ -22,6 +22,7 @@ export interface Config {
     text: string
     hotkey: string | null
   }>
+  clientLog: string | null
   useOsGlobalShortcut: boolean
   windowTitle: string
   logLevel: string
@@ -33,6 +34,7 @@ export interface Config {
   language: 'en' | 'ru'
   widgets: Widget[]
   fontSize: number
+  disableUpdateDownload: boolean
 }
 
 interface Widget {
@@ -88,6 +90,7 @@ export const defaultConfig: Config = {
     text: '/hideout @last',
     hotkey: null
   }],
+  clientLog: null,
   useOsGlobalShortcut: true,
   windowTitle: 'Path of Exile',
   logLevel: 'warn',
@@ -98,6 +101,7 @@ export const defaultConfig: Config = {
   stashScroll: true,
   language: 'en',
   fontSize: 16,
+  disableUpdateDownload: false,
   widgets: [
     // --- REQUIRED ---
     {
