@@ -14,7 +14,7 @@
     "postinstall": "patch-package && electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "robotjs:rebuild": "npm rebuild --runtime=electron --target=9.3.1 --disturl=https://atom.io/download/atom-shell --abi=80",
-    "electron:version":"electron -v && electron -a"
+    "electron:version": "electron -v && electron -a"
   },
   "author": {
     "name": "Alexander Drozdov"
@@ -32,6 +32,7 @@
     "electron-updater": "^4.2.0",
     "fast-deep-equal": "3.1.x",
     "find-process": "^1.4.3",
+    "howler": "^2.2.0",
     "luxon": "1.25.x",
     "portal-vue": "2.1.7",
     "robotjs": "^0.6.0",
@@ -50,8 +51,8 @@
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^1.0.0",
-    "@types/lodash": "^4.14.158",
     "@types/electron-devtools-installer": "^2.2.0",
+    "@types/lodash": "^4.14.158",
     "@types/node": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
