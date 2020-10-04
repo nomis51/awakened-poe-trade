@@ -32,7 +32,7 @@
                 {{ offer.time | time }}
                 <template v-if="offer.location.tab">
                   <br />
-                  tab <br>"{{ offer.location.tab }}"<br />
+                  tab <br />"{{ offer.location.tab }}"<br />
                   left: {{ offer.location.left }}, top: {{ offer.location.top }}
                 </template>
               </p>
@@ -95,26 +95,30 @@
 </template>
 
 <script>
-import { MainProcess } from '../../../ipc/main-process-bindings'
+import { MainProcess } from '../../../ipc/main-process-bindings';
+import { play } from '../audioPlayer';
+
+const clickAudioFile = require('@/assets/audio/click.wav');
+
 export default {
   props: ['offer'],
   filters: {
-    elipsis: function (value, length = 10) {
+    elipsis: function(value, length = 10) {
       if (!value) {
-        return ''
+        return '';
       }
 
-      const strValue = value.toString()
+      const strValue = value.toString();
       return strValue.length >= length
         ? `${strValue.substring(0, length - 1)}...`
-        : strValue
+        : strValue;
     },
-    time: function (value) {
+    time: function(value) {
       if (!value) {
-        return ''
+        return '';
       }
 
-      return value.substring(11)
+      return value.substring(11);
     }
   },
   data: () => ({
@@ -124,59 +128,68 @@ export default {
     showDetails: false
   }),
   methods: {
-    setPlayerJoined () {
-      this.playerJoined = true
+    setPlayerJoined() {
+      this.playerJoined = true;
     },
-    setTradeRequestSent (state) {
-      this.tradeRequestSent = state
+    setTradeRequestSent(state) {
+      this.tradeRequestSent = state;
     },
-    offerClicked () {
-      MainProcess.focusGame()
+    offerClicked() {
+      play(clickAudioFile);
+      MainProcess.focusGame();
 
       if (this.partyInviteSent) {
-        this.sendTradeRequest()
+        this.sendTradeRequest();
       } else {
-        this.sendPartyInvite()
+        this.sendPartyInvite();
       }
     },
-    sendTradeRequest () {
-      this.$emit('tradeRequest')
-      this.tradeRequestSent = true
+    sendTradeRequest() {
+      play(clickAudioFile);
+      this.$emit('tradeRequest');
+      this.tradeRequestSent = true;
     },
-    sendPartyInvite (focusGame = false) {
+    sendPartyInvite(focusGame = false) {
+      play(clickAudioFile);
       if (focusGame) {
-        MainProcess.focusGame()
+        MainProcess.focusGame();
       }
 
-      this.$emit('partyInvite')
-      this.partyInviteSent = true
+      this.$emit('partyInvite');
+      this.partyInviteSent = true;
     },
-    sendStillInterestedWhisper () {
-      MainProcess.focusGame()
-      this.$emit('stillInterested')
+    sendStillInterestedWhisper() {
+      play(clickAudioFile);
+      MainProcess.focusGame();
+      this.$emit('stillInterested');
     },
-    dismiss () {
-      MainProcess.focusGame()
-      this.$emit('dismiss')
+    dismiss() {
+      play(clickAudioFile);
+      MainProcess.focusGame();
+      this.$emit('dismiss');
     },
-    remove () {
-      MainProcess.focusGame()
-      this.$emit('remove')
+    remove() {
+      play(clickAudioFile);
+      MainProcess.focusGame();
+      this.$emit('remove');
     },
-    sendSoldWhisper () {
-      MainProcess.focusGame()
-      this.$emit('sold')
+    sendSoldWhisper() {
+      play(clickAudioFile);
+      MainProcess.focusGame();
+      this.$emit('sold');
     },
-    sendBusyWhisper () {
-      MainProcess.focusGame()
-      this.$emit('busy')
+    sendBusyWhisper() {
+      play(clickAudioFile);
+      MainProcess.focusGame();
+      this.$emit('busy');
     },
-    highlightItem () {
-      MainProcess.focusGame()
-      this.$emit('highlightItem')
+    highlightItem() {
+      play(clickAudioFile);
+      MainProcess.focusGame();
+      this.$emit('highlightItem');
     }
   }
-}
+};
 </script>
 
 <style>

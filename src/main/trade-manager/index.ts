@@ -82,7 +82,7 @@ class TradeManager {
    */
   private isExecuting: boolean = false;
 
-  constructor () {
+  constructor() {
     this.handleEvents()
 
     this.debounced_readLastLines = debounce(
@@ -95,7 +95,7 @@ class TradeManager {
    * Setup the MainProcess events
    * Overlay -> Main
    */
-  private handleEvents () {
+  private handleEvents() {
     ipcMain.on(SEND_STILL_INTERESTED_WHISPER, (_, offer) =>
       this.execute(this.sendStillInterestedWhisper, [offer])
     )
@@ -137,7 +137,7 @@ class TradeManager {
    * Send a join hideout command using the player in the offer
    * @param offer The offer related to the hideout command
    */
-  private sendJoinHideout (offer: Offer) {
+  private sendJoinHideout(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -154,7 +154,7 @@ class TradeManager {
    * @param fn A function of "this" context
    * @param args Arguments of the "fn" function
    */
-  private execute (fn: any, args: any[]): void {
+  private execute(fn: any, args: any[]): void {
     this.commands.enqueue({
       fn: fn.bind(this),
       args
@@ -166,7 +166,7 @@ class TradeManager {
   /**
    * Dequeue the list of "commands" and execute them, if not already doing so
    */
-  private _execute () {
+  private _execute() {
     if (!this.isExecuting) {
       this.isExecuting = true
 
@@ -184,7 +184,7 @@ class TradeManager {
    * Do a Key Up on the Ctrl, Alt and Shift keys.
    * Prevent problems and conflict while sending commands to the game
    */
-  private clearKeyModifiers () {
+  private clearKeyModifiers() {
     const MODIFIERS = ['Ctrl', 'Alt', 'Shift']
 
     for (const m of MODIFIERS) {
@@ -195,7 +195,7 @@ class TradeManager {
   /**
    * Remove the item highlighting of the in-game Ctrl + F shortcut
    */
-  private clearOfferItemHighlighting () {
+  private clearOfferItemHighlighting() {
     // // Select the text
     // robotjs.keyTap("F", ["Ctrl"]);
     // // Remove it
@@ -208,7 +208,7 @@ class TradeManager {
    * Highlight the item in the "offer" using the in-game search tool
    * @param offer The offer to be highlighted
    */
-  private highlightOfferItem (offer: Offer) {
+  private highlightOfferItem(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -230,7 +230,7 @@ class TradeManager {
    * Send a party invite in-game to player in the offer
    * @param offer The offer related to the party invite command
    */
-  private sendPartyInvite (offer: Offer) {
+  private sendPartyInvite(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -246,7 +246,7 @@ class TradeManager {
    * Kick out of the party the player in the "offer"
    * @param offer The offer realted to the kick command
    */
-  private sendPartyKick (offer: Offer) {
+  private sendPartyKick(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -262,7 +262,7 @@ class TradeManager {
    * Send a trade request to the player in the "offer"
    * @param offer The offer related to the trade request command
    */
-  private sendTradeRequest (offer: Offer) {
+  private sendTradeRequest(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -279,7 +279,7 @@ class TradeManager {
    * @param offer The offer related to the whisper
    * @param kickPlayer Kick out of the party the player in the offer, if needed.
    */
-  private sendThanksWhisper (offer: Offer, kickPlayer: boolean = true) {
+  private sendThanksWhisper(offer: Offer, kickPlayer: boolean = true) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -301,7 +301,7 @@ class TradeManager {
    * Sedn a "I'm busy" whisper to the player in the "offer"
    * @param offer The offer related to the whisper
    */
-  private sendBusyWhisper (offer: Offer) {
+  private sendBusyWhisper(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -315,7 +315,7 @@ class TradeManager {
     setTimeout(() => (this.isPollingClipboard = true), 500)
   }
 
-  private sendWhisper (whisper: string) {
+  private sendWhisper(whisper: string) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -331,7 +331,7 @@ class TradeManager {
    * Send a "It's sold" to the player in the "offer"
    * @param offer The offer related to the whisper
    */
-  private sendSoldWhisper (offer: Offer) {
+  private sendSoldWhisper(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -349,7 +349,7 @@ class TradeManager {
    * Send a "Are you still interested?" whisper to the player in the "offer"
    * @param offer The offer related to the whisper
    */
-  private sendStillInterestedWhisper (offer: Offer) {
+  private sendStillInterestedWhisper(offer: Offer) {
     this.isPollingClipboard = false
 
     focusPoE()
@@ -368,7 +368,7 @@ class TradeManager {
   /**
    * Find the informations about the Path of Exile system process, if possible
    */
-  private async findPoEProcess (): Promise<ProcessInfos | undefined> {
+  private async findPoEProcess(): Promise<ProcessInfos | undefined> {
     const procs = await findProcess('name', /pathofexile|wine64-preloader/gi)
     return procs.length > 0 ? <ProcessInfos>procs[0] : undefined
   }
@@ -376,13 +376,13 @@ class TradeManager {
   /**
    * Start the trade manager.
    */
-  async start (): Promise<boolean> {
+  async start(): Promise<boolean> {
     const poeProc = await this.findPoEProcess()
 
     if (!poeProc) {
       console.warn(
         `Unable to find PoE process, make sure the game is running. Retrying in ${POE_PROCESS_RETRY_RATE_MS /
-          1000} second(s)...`
+        1000} second(s)...`
       )
 
       if (!this.retryInterval) {
@@ -423,7 +423,7 @@ class TradeManager {
    * Start looking for changes in the Client.txt log
    * file of Path of Exile. Read the new lines if any.
    */
-  private listenIncomingTradeOffers (): void {
+  private listenIncomingTradeOffers(): void {
     watchFile(
       this.logFilePath,
       {
@@ -439,7 +439,7 @@ class TradeManager {
   /**
    * Gets the newest value in the clipbord, if any
    */
-  private pollClipboard (): string {
+  private pollClipboard(): string {
     const text = clipboard.readText()
 
     if (this.lastClipboardValue === null) {
@@ -455,7 +455,7 @@ class TradeManager {
   /**
    * Start looking for outgoing trade whisper in the clipboard
    */
-  private listenOutgoingTradeOffers (): void {
+  private listenOutgoingTradeOffers(): void {
     this.isPollingClipboard = true
 
     setInterval(() => {
@@ -472,7 +472,7 @@ class TradeManager {
   /**
    * Find the last position (EOF) in the Client.txt file
    */
-  private moveFilePositionToEOF (): void {
+  private moveFilePositionToEOF(): void {
     stat(this.logFilePath, (err, infos) => {
       if (err) {
         console.info('Cannot get Client.txt stats.')
@@ -487,7 +487,7 @@ class TradeManager {
    * Read all the newest lines in the file from the last
    * position red
    */
-  private readLastLines (): void {
+  private readLastLines(): void {
     stat(this.logFilePath, (err, fileInfos) => {
       if (err) {
         console.error(err)
@@ -544,7 +544,7 @@ class TradeManager {
    * @param parser The functions used to parse the "line"
    * @param line The log/clipboard text line that need to be parsed
    */
-  private parseLine (
+  private parseLine(
     parser: Parser,
     line: string
   ): { ok: boolean; value: Offer | undefined } {
@@ -568,7 +568,7 @@ class TradeManager {
    * @param line The text line that need to be parsed
    * @param type If known, the type of text line provided
    */
-  private parse (line: string, type: string = 'log'): void {
+  private parse(line: string, type: string = 'log'): void {
     console.log('Line: ', line)
 
     if (type === 'log') {

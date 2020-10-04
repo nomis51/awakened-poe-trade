@@ -23,145 +23,148 @@
 </template>
 
 <script>
-import { MainProcess } from '@/ipc/main-process-bindings'
+import { MainProcess } from '@/ipc/main-process-bindings';
 import {
   NEW_INCOMING_OFFER,
   TRADE_ACCEPTED,
   TRADE_CANCELLED,
   PLAYER_JOINED
-} from '@/ipc/ipc-event'
+} from '@/ipc/ipc-event';
+import { play } from '../audioPlayer';
 
-import IncomingOffer from './IncomingOffer'
+import IncomingOffer from './IncomingOffer';
 
 export default {
   components: {
     IncomingOffer
   },
-  created () {
-    this.handleEvents()
+  created() {
+    this.handleEvents();
   },
-  data () {
+  data() {
     return {
       offers: []
-    }
+    };
   },
   methods: {
     /**
      * Handles the events from the MainProcess
      */
-    handleEvents () {
+    handleEvents() {
       /**
        * Any new incoming offers from the Client.txt file
        */
       MainProcess.addEventListener(NEW_INCOMING_OFFER, ({ detail: offer }) => {
-        this.offers.push(offer)
-      })
+         play(require('@/assets/audio/notif1.mp3'));
+        this.offers.push(offer);
+      });
 
       /**
        * Any "Trade accepted" message that might help removing completed offers
        */
       MainProcess.addEventListener(TRADE_ACCEPTED, () => {
-        const offer = this.offers.find(o => o.tradeRequestSent)
+        const offer = this.offers.find(o => o.tradeRequestSent);
 
         if (offer) {
-          MainProcess.sendThanksWhisper(offer, true)
-          this.dismiss(offer)
+          MainProcess.sendThanksWhisper(offer, true);
+          this.dismiss(offer);
         }
-      })
+      });
 
       /**
        * Any "Trade cancelled" or "Player not found in the area" message that reset the trading status of the offers
        */
       MainProcess.addEventListener(TRADE_CANCELLED, () => {
         for (let i = 0; i < this.$refs.offers.length; ++i) {
-          this.$refs.offers[i].setTradeRequestSent(false)
+          this.$refs.offers[i].setTradeRequestSent(false);
         }
-      })
+      });
 
       /**
        * Any "Player has joined the area" message to display a notification in the view
        */
       MainProcess.addEventListener(PLAYER_JOINED, ({ detail: player }) => {
         for (let i = 0; i < this.offers.length; ++i) {
-          if (this.offers[i].player == player) {
+          if (this.offers[i].player === player) {
             for (const vo of this.$refs.offers) {
-              if (this.offers[i].id == vo.offer.id) {
-                vo.setPlayerJoined()
+              if (this.offers[i].id === vo.offer.id) {
+                play(require('@/assets/audio/knocking-on-door.mp3'));
+                vo.setPlayerJoined();
               }
             }
           }
         }
-      })
+      });
     },
     /**
      * Remove an offer from the view
      */
-    dismiss (offer) {
-      const index = this.offers.findIndex(o => o.id === offer.id)
+    dismiss(offer) {
+      const index = this.offers.findIndex(o => o.id === offer.id);
 
       if (index !== -1) {
-        this.offers.splice(index, 1)
+        this.offers.splice(index, 1);
       }
     },
     /**
      * Ask the MainProcess to send a "Are you still interested?"
      * whisper using the offer provided
      */
-    sendStillInterestedWhisper (offer) {
-      MainProcess.sendStillInterestedWhisper(offer)
+    sendStillInterestedWhisper(offer) {
+      MainProcess.sendStillInterestedWhisper(offer);
     },
     /**
      * Ask the MainProcess to send a Party Invite command
      * using the offer provided
      */
-    sendPartyInvite (offer) {
-      MainProcess.sendPartyInvite(offer)
+    sendPartyInvite(offer) {
+      MainProcess.sendPartyInvite(offer);
     },
     /**
      * Call the Dismiss function and ask the MainProcess to send
      * a Party Kick command using the offer provided
      */
-    remove (offer) {
-      this.dismiss(offer)
-      MainProcess.sendPartyKick(offer)
+    remove(offer) {
+      this.dismiss(offer);
+      MainProcess.sendPartyKick(offer);
     },
     /**
      * Ask the MainProcess to send a "It's sold"
      * whisper using the offer provided
      */
-    sendSoldWhisper (offer) {
-      this.dismiss(offer)
-      MainProcess.sendSoldWhisper(offer)
+    sendSoldWhisper(offer) {
+      this.dismiss(offer);
+      MainProcess.sendSoldWhisper(offer);
     },
     /**
      * Ask the MainProcess to send a "I'm busy"
      * whisper using the offer provided
      */
-    sendBusyWhisper (offer) {
-      MainProcess.sendBusyWhisper(offer)
+    sendBusyWhisper(offer) {
+      MainProcess.sendBusyWhisper(offer);
     },
     /**
      * Ask the MainProcess to send
      * a Trade Request command using the offer provided
      */
-    sendTradeRequest (offer) {
-      const index = this.offers.findIndex(o => o.id === offer.id)
+    sendTradeRequest(offer) {
+      const index = this.offers.findIndex(o => o.id === offer.id);
 
       if (index !== -1) {
-        this.offers[index].tradeRequestSent = true
+        this.offers[index].tradeRequestSent = true;
       }
 
-      MainProcess.sendTradeRequest(offer)
+      MainProcess.sendTradeRequest(offer);
     },
     /**
      * Ask the MainProcess to send a
      * item highlighting command using the offer provided
      */
-    highlightItem (offer) {
-      MainProcess.highlightOfferItem(offer)
+    highlightItem(offer) {
+      MainProcess.highlightOfferItem(offer);
     }
   }
-}
+};
 </script>
 
 <style>
