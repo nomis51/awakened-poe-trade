@@ -12,7 +12,9 @@
     "electron:generate-icons": "electron-icon-builder --input=./public/icon.png --output=build --flatten",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './src/web/locales/**/*.json'",
     "postinstall": "patch-package && electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps"
+    "postuninstall": "electron-builder install-app-deps",
+    "robotjs:rebuild": "npm rebuild --runtime=electron --target=9.3.1 --disturl=https://atom.io/download/atom-shell --abi=80",
+    "electron:version":"electron -v && electron -a"
   },
   "author": {
     "name": "Alexander Drozdov"
