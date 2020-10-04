@@ -22,5 +22,6 @@ module.exports = {
     i18n: {
       enableInSFC: true
     }
-  }
+  },
+  lintOnSave: false
 }

@@ -52,7 +52,7 @@ export default {
     WidgetMapCheck,
     WidgetImageStrip,
     IncomingOffersContainer,
-    OutgoingOffersContainer
+    OutgoingOffersContainer,
     WidgetDelveGrid
   },
   provide() {

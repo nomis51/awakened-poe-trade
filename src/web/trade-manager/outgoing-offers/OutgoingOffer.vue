@@ -65,26 +65,26 @@
 </template>
 
 <script>
-import { MainProcess } from "../../../ipc/main-process-bindings";
+import { MainProcess } from '../../../ipc/main-process-bindings'
 export default {
-  props: ["offer"],
+  props: ['offer'],
   filters: {
-    elipsis: function(value, length = 10) {
+    elipsis: function (value, length = 10) {
       if (!value) {
-        return "";
+        return ''
       }
 
-      const strValue = value.toString();
+      const strValue = value.toString()
       return strValue.length >= length
         ? `${strValue.substring(0, length - 1)}...`
-        : strValue;
+        : strValue
     },
-    time: function(value) {
+    time: function (value) {
       if (!value) {
-        return "";
+        return ''
       }
 
-      return value.substring(11);
+      return value.substring(11)
     }
   },
   data: () => ({
@@ -93,45 +93,45 @@ export default {
     elapsedTime: 0,
     time: null
   }),
-  mounted() {
-    this.checkIfExpired();
+  mounted () {
+    this.checkIfExpired()
   },
   methods: {
-    checkIfExpired() {
-      const date = new Date();
+    checkIfExpired () {
+      const date = new Date()
       this.time = new Date(
         `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${
           this.offer.time
         }`
-      );
+      )
 
       setInterval(() => {
-        const now = new Date();
-        const value = (now.getTime() - this.time.getTime()) / 1000;
+        const now = new Date()
+        const value = (now.getTime() - this.time.getTime()) / 1000
 
         if (value >= 60 && !this.hideoutJoined) {
-          this.$emit("dismiss");
+          this.$emit('dismiss')
         }
 
-        this.elapsedTime = value.toFixed(0);
-      }, 1000);
+        this.elapsedTime = value.toFixed(0)
+      }, 1000)
     },
-    sendJoinHideout() {
-      MainProcess.focusGame();
-      this.$emit("joinHideout");
-      this.hideoutJoined = true;
+    sendJoinHideout () {
+      MainProcess.focusGame()
+      this.$emit('joinHideout')
+      this.hideoutJoined = true
     },
-    sendTradeRequest() {
-      MainProcess.focusGame();
-      this.$emit("tradeRequest");
-      this.tradeRequestSent = true;
+    sendTradeRequest () {
+      MainProcess.focusGame()
+      this.$emit('tradeRequest')
+      this.tradeRequestSent = true
     },
-    dismiss() {
-      MainProcess.focusGame();
-      this.$emit("dismiss");
+    dismiss () {
+      MainProcess.focusGame()
+      this.$emit('dismiss')
     }
   }
-};
+}
 </script>
 
 <style>

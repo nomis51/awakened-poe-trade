@@ -25,81 +25,81 @@
 </template>
 
 <script>
-import { MainProcess } from "@/ipc/main-process-bindings";
+import { MainProcess } from '@/ipc/main-process-bindings'
 import {
   NEW_outgoing_OFFER,
   TRADE_ACCEPTED,
   TRADE_CANCELLED,
   PLAYER_JOINED,
   NEW_OUTGOING_OFFER
-} from "@/ipc/ipc-event";
+} from '@/ipc/ipc-event'
 
-import OutgoingOffer from "./OutgoingOffer";
+import OutgoingOffer from './OutgoingOffer'
 
 export default {
   components: {
     OutgoingOffer
   },
-  created() {
-    this.handleEvents();
+  created () {
+    this.handleEvents()
   },
-  data() {
+  data () {
     return {
       offers: []
-    };
+    }
   },
   methods: {
     /**
      * Handles the events from the MainProcess
      */
-    handleEvents() {
+    handleEvents () {
       /**
        * Any new outgoing offers from the clipboard
        */
       MainProcess.addEventListener(NEW_OUTGOING_OFFER, ({ detail: offer }) => {
-        console.log("New outgoing offer", offer);
-        this.offers.unshift(offer);
-      });
+        console.log('New outgoing offer', offer)
+        this.offers.unshift(offer)
+      })
 
       /**
        * Any "Trade accepted" message that might help removing completed offers
        */
       MainProcess.addEventListener(TRADE_ACCEPTED, () => {
-        const offer = this.offers.find(o => o.hideoutJoined);
+        const offer = this.offers.find(o => o.hideoutJoined)
 
         if (offer) {
-          MainProcess.sendThanksWhisper(offer, false);
-          this.dismiss(offer);
+          MainProcess.sendThanksWhisper(offer, false)
+          this.dismiss(offer)
         }
-      });
+      })
     },
-    dismiss(offer) {
-      const index = this.offers.findIndex(o => o.id === offer.id);
+    dismiss (offer) {
+      const index = this.offers.findIndex(o => o.id === offer.id)
 
       if (index !== -1) {
-        this.offers.splice(index, 1);
+        this.offers.splice(index, 1)
       }
     },
-    sendJoinHideout(offer) {
-      const index = this.offers.findIndex(o => o.id === offer.id);
+    sendJoinHideout (offer) {
+      const index = this.offers.findIndex(o => o.id === offer.id)
 
       if (index !== -1) {
-        this.offers[index].hideoutJoined = true;
+        this.offers[index].hideoutJoined = true
       }
 
-      MainProcess.sendJoinHideout(offer);
+      MainProcess.sendJoinHideout(offer)
     },
-    sendTradeRequest(offer) {
-      const index = this.offers.findIndex(o => o.id === offer.id);
+    sendTradeRequest (offer) {
+      const index = this.offers.findIndex(o => o.id === offer.id)
 
       if (index !== -1) {
-        this.offers[index].tradeRequestSent = true;
+        this.offers[index].tradeRequestSent = true
       }
 
-      MainProcess.sendTradeRequest(offer);
+      MainProcess.sendTradeRequest(offer)
     }
   }
-};
+}
 </script>
 
 <style>

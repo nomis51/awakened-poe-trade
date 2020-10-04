@@ -95,26 +95,26 @@
 </template>
 
 <script>
-import { MainProcess } from "../../../ipc/main-process-bindings";
+import { MainProcess } from '../../../ipc/main-process-bindings'
 export default {
-  props: ["offer"],
+  props: ['offer'],
   filters: {
-    elipsis: function(value, length = 10) {
+    elipsis: function (value, length = 10) {
       if (!value) {
-        return "";
+        return ''
       }
 
-      const strValue = value.toString();
+      const strValue = value.toString()
       return strValue.length >= length
         ? `${strValue.substring(0, length - 1)}...`
-        : strValue;
+        : strValue
     },
-    time: function(value) {
+    time: function (value) {
       if (!value) {
-        return "";
+        return ''
       }
 
-      return value.substring(11);
+      return value.substring(11)
     }
   },
   data: () => ({
@@ -124,59 +124,59 @@ export default {
     showDetails: false
   }),
   methods: {
-    setPlayerJoined() {
-      this.playerJoined = true;
+    setPlayerJoined () {
+      this.playerJoined = true
     },
-    setTradeRequestSent(state) {
-      this.tradeRequestSent = state;
+    setTradeRequestSent (state) {
+      this.tradeRequestSent = state
     },
-    offerClicked() {
-      MainProcess.focusGame();
+    offerClicked () {
+      MainProcess.focusGame()
 
       if (this.partyInviteSent) {
-        this.sendTradeRequest();
+        this.sendTradeRequest()
       } else {
-        this.sendPartyInvite();
+        this.sendPartyInvite()
       }
     },
-    sendTradeRequest() {
-      this.$emit("tradeRequest");
-      this.tradeRequestSent = true;
+    sendTradeRequest () {
+      this.$emit('tradeRequest')
+      this.tradeRequestSent = true
     },
-    sendPartyInvite(focusGame = false) {
+    sendPartyInvite (focusGame = false) {
       if (focusGame) {
-        MainProcess.focusGame();
+        MainProcess.focusGame()
       }
 
-      this.$emit("partyInvite");
-      this.partyInviteSent = true;
+      this.$emit('partyInvite')
+      this.partyInviteSent = true
     },
-    sendStillInterestedWhisper() {
-      MainProcess.focusGame();
-      this.$emit("stillInterested");
+    sendStillInterestedWhisper () {
+      MainProcess.focusGame()
+      this.$emit('stillInterested')
     },
-    dismiss() {
-      MainProcess.focusGame();
-      this.$emit("dismiss");
+    dismiss () {
+      MainProcess.focusGame()
+      this.$emit('dismiss')
     },
-    remove() {
-      MainProcess.focusGame();
-      this.$emit("remove");
+    remove () {
+      MainProcess.focusGame()
+      this.$emit('remove')
     },
-    sendSoldWhisper() {
-      MainProcess.focusGame();
-      this.$emit("sold");
+    sendSoldWhisper () {
+      MainProcess.focusGame()
+      this.$emit('sold')
     },
-    sendBusyWhisper() {
-      MainProcess.focusGame();
-      this.$emit("busy");
+    sendBusyWhisper () {
+      MainProcess.focusGame()
+      this.$emit('busy')
     },
-    highlightItem() {
-      MainProcess.focusGame();
-      this.$emit("highlightItem");
+    highlightItem () {
+      MainProcess.focusGame()
+      this.$emit('highlightItem')
     }
   }
-};
+}
 </script>
 
 <style>
