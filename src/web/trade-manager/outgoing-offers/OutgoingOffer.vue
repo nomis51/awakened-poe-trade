@@ -66,6 +66,10 @@
 
 <script>
 import { MainProcess } from '../../../ipc/main-process-bindings'
+import { play } from '../audioPlayer';
+
+const clickAudioFile = require('@/assets/audio/click.wav');
+
 export default {
   props: ['offer'],
   filters: {
@@ -117,16 +121,19 @@ export default {
       }, 1000)
     },
     sendJoinHideout () {
+       play(clickAudioFile);
       MainProcess.focusGame()
       this.$emit('joinHideout')
       this.hideoutJoined = true
     },
     sendTradeRequest () {
+       play(clickAudioFile);
       MainProcess.focusGame()
       this.$emit('tradeRequest')
       this.tradeRequestSent = true
     },
     dismiss () {
+       play(clickAudioFile);
       MainProcess.focusGame()
       this.$emit('dismiss')
     }
