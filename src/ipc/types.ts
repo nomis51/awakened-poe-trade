@@ -34,7 +34,23 @@ export interface Config {
   language: 'en' | 'ru'
   widgets: Widget[]
   fontSize: number
-  disableUpdateDownload: boolean
+  disableUpdateDownload: boolean,
+  tradeManager: {
+    whispers: {
+      thanks: string,
+      sold: string,
+      busy: string,
+      stillInterested: string
+    },
+    autoKick: boolean,
+    autoThanks: boolean,
+    autoWhisper: boolean,
+    sounds: {
+      newOffer: string,
+      buyerJoined: string,
+      uiClick: string
+    }
+  }
 }
 
 interface Widget {
@@ -102,6 +118,22 @@ export const defaultConfig: Config = {
   language: 'en',
   fontSize: 16,
   disableUpdateDownload: false,
+  tradeManager: {
+    whispers: {
+      thanks: "Thanks",
+      sold: "Sorry, it's already sold",
+      busy: "I'm busy",
+      stillInterested: "Are you still interested in my {item} listed for {price}?"
+    },
+    autoKick: true,
+    autoThanks: true,
+    autoWhisper: true,
+    sounds: {
+      newOffer: '(default)',
+      buyerJoined: '(default)',
+      uiClick: '(default)'
+    }
+  },
   widgets: [
     // --- REQUIRED ---
     {

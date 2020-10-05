@@ -32,6 +32,7 @@
     "electron-updater": "^4.2.0",
     "fast-deep-equal": "3.1.x",
     "find-process": "^1.4.3",
+    "lodash": "^4.17.20",
     "luxon": "1.25.x",
     "portal-vue": "2.1.7",
     "robotjs": "^0.6.0",

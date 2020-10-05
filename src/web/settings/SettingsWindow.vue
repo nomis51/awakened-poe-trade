@@ -10,6 +10,7 @@
         <div class="border-b m-1 border-gray-800"></div>
         <router-link :to="{ name: 'settings.price-check' }" class="menu-item">{{ $t('Price check') }}</router-link>
         <router-link :to="{ name: 'settings.maps' }" class="menu-item">{{ $t('Maps') }}</router-link>
+          <router-link :to="{ name: 'settings.trade-manager' }" class="menu-item">{{ $t('Trade manager') }}</router-link>
         <div class="border-b m-1 border-gray-800"></div>
         <router-link :to="{ name: 'settings.debug' }" class="menu-item">{{ $t('Debug') }}</router-link>
         <div style="min-width: 9.5rem;"></div>

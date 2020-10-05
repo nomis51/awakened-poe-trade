@@ -34,6 +34,22 @@ import { Parser } from './models/Parser'
 import { parsing } from './Parsers'
 import { Queue } from './models/Queue'
 import { Offer } from './models/Offer'
+import { config } from '../config'
+
+interface WhisperVar {
+  token: string,
+  getter: (offer: Offer) => string
+}
+
+const whisperVars: WhisperVar[] = [
+  {
+    token: '{item}',
+    getter: (offer: Offer) => offer.item
+  }, {
+    token: '{price}',
+    getter: (offer: Offer) => `${offer.price.value} ${offer.price.currency}`
+  }
+]
 
 /**
  * Define the Trade Manager class
@@ -274,6 +290,14 @@ class TradeManager {
     setTimeout(() => (this.isPollingClipboard = true), 500)
   }
 
+  private injectWhisperVars(whisper: string, offer: Offer): string {
+    whisperVars.forEach((v) => {
+      whisper = whisper.replace(v.token, v.getter(offer));
+    });
+
+    return whisper;
+  }
+
   /**
    * Send a "Thanks" whisper to the player in the "offer"
    * @param offer The offer related to the whisper
@@ -286,7 +310,7 @@ class TradeManager {
 
     this.clearOfferItemHighlighting()
 
-    typeInChat(`@${offer.player} Thanks`)
+    typeInChat(`@${offer.player} ${this.injectWhisperVars(config.store.tradeManager.whispers.thanks, offer)}`)
 
     if (kickPlayer) {
       setTimeout(() => {
@@ -309,7 +333,7 @@ class TradeManager {
     this.clearOfferItemHighlighting()
 
     typeInChat(
-      `@${offer.player} I'm busy right now, but I will send you a party invite when I'm ready`
+      `@${offer.player} ${this.injectWhisperVars(config.store.tradeManager.whispers.busy, offer)}`
     )
 
     setTimeout(() => (this.isPollingClipboard = true), 500)
@@ -340,7 +364,7 @@ class TradeManager {
 
     this.clearKeyModifiers()
 
-    typeInChat(`@${offer.player} Sorry, my ${offer.item} is already sold`)
+    typeInChat(`@${offer.player} ${this.injectWhisperVars(config.store.tradeManager.whispers.sold, offer)}`)
 
     setTimeout(() => (this.isPollingClipboard = true), 500)
   }
@@ -359,7 +383,7 @@ class TradeManager {
     this.clearKeyModifiers()
 
     typeInChat(
-      `@${offer.player} Are you still interested in my ${offer.item} listed for ${offer.price.value} ${offer.price.currency}?`
+      `@${offer.player} ${this.injectWhisperVars(config.store.tradeManager.whispers.stillInterested, offer)}`
     )
 
     setTimeout(() => (this.isPollingClipboard = true), 500)
@@ -596,7 +620,10 @@ class TradeManager {
           break
 
         case 'outgoingOffer':
-          this.sendWhisper(line)
+          if (config.store.tradeManager.autoWhisper) {
+            this.sendWhisper(line)
+          }
+
           overlayWindow!.webContents.send(NEW_OUTGOING_OFFER, result.value)
           break
 

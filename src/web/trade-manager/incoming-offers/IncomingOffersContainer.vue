@@ -23,16 +23,20 @@
 </template>
 
 <script>
-import { MainProcess } from '@/ipc/main-process-bindings';
+import { MainProcess } from "@/ipc/main-process-bindings";
 import {
   NEW_INCOMING_OFFER,
   TRADE_ACCEPTED,
   TRADE_CANCELLED,
   PLAYER_JOINED
-} from '@/ipc/ipc-event';
-import { play } from '../audioPlayer';
+} from "@/ipc/ipc-event";
+import { play, playFromFile } from "../audioPlayer";
+import { Config } from "@/web/Config";
 
-import IncomingOffer from './IncomingOffer';
+import IncomingOffer from "./IncomingOffer";
+import { config } from "winston";
+
+const defaultSoundValue = "(default)";
 
 export default {
   components: {
@@ -55,7 +59,11 @@ export default {
        * Any new incoming offers from the Client.txt file
        */
       MainProcess.addEventListener(NEW_INCOMING_OFFER, ({ detail: offer }) => {
-         play(require('@/assets/audio/notif1.mp3'));
+        if (Config.store.tradeManager.sounds.newOffer === defaultSoundValue) {
+          play(require("@/assets/audio/notif1.mp3"));
+        } else {
+          playFromFile(Config.store.tradeManager.sounds.newOffer);
+        }
         this.offers.push(offer);
       });
 
@@ -65,9 +73,16 @@ export default {
       MainProcess.addEventListener(TRADE_ACCEPTED, () => {
         const offer = this.offers.find(o => o.tradeRequestSent);
 
-        if (offer) {
-          MainProcess.sendThanksWhisper(offer, true);
-          this.dismiss(offer);
+        if (Config.store.tradeManager.autoThanks) {
+          if (offer) {
+            MainProcess.sendThanksWhisper(
+              offer,
+              Config.store.tradeManager.autoKick
+            );
+            this.dismiss(offer);
+          }
+        } else if (Config.store.tradeManager.autoKick) {
+          MainProcess.sendPartyKick(offer);
         }
       });
 
@@ -88,7 +103,7 @@ export default {
           if (this.offers[i].player === player) {
             for (const vo of this.$refs.offers) {
               if (this.offers[i].id === vo.offer.id) {
-                play(require('@/assets/audio/knocking-on-door.mp3'));
+                play(require("@/assets/audio/knocking-on-door.mp3"));
                 vo.setPlayerJoined();
               }
             }

@@ -45,6 +45,11 @@ export default new Router({
           path: 'maps',
           name: 'settings.maps',
           component: () => import(/* webpackChunkName: "settings" */ './settings/maps.vue')
+        },
+        {
+          path: 'trade-manager',
+          name: 'settings.trade-manager',
+          component: () => import(/* webpackChunkName: "settings" */ './settings/trade-manager.vue')
         }
       ]
     }

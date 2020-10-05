@@ -29,7 +29,7 @@ export function createWindow () {
 
   settingsWindow = new BrowserWindow({
     width: 50 * config.get('fontSize'),
-    height: 37.5 * config.get('fontSize'),
+    height: 57.5 * config.get('fontSize'),
     icon: path.join(__static, 'icon.png'),
     fullscreenable: false,
     frame: false,
