@@ -1,24 +1,34 @@
 import { Offer } from '../models/Offer'
 import en from './en'
+import ru from './ru';
 
-interface Parser {
-    incomingOffer: {
-        validate: (text: string) => boolean,
-        parse: (text: string, id: number) => Offer,
-    },
-    outgoingOffer: {
-        validate: (text: string) => boolean,
-        parse: (text: string, id: number) => Offer,
-    },
+export interface OfferParserProcessor {
+    validate: (text: string) => boolean,
+    parse: (text: string, id: number) => Offer | null,
 }
 
-interface Parsers {
-    en: Parser
+export interface EventParserProcessor {
+    validate: (text: string) => boolean,
+    parse: (text: string) => string,
+}
+
+export interface Parser {
+    incomingOffer: OfferParserProcessor,
+    outgoingOffer: OfferParserProcessor,
+    tradeAccepted: EventParserProcessor,
+    tradeCancelled: EventParserProcessor,
+    playerJoined: EventParserProcessor
+}
+
+export interface Parsers {
+    en: Parser,
+    ru: Parser
 }
 
 /**
  * Defines the way to parse different types messages/whispers/etc. based on the language
  */
-export const parsing: Parsers = {
-    en
+export const parsing: any = {
+    en,
+    ru
 }

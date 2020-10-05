@@ -30,8 +30,7 @@ import {
   CLIPBOARD_POLLING_RATE_MS
 } from './Config'
 import { ProcessInfos } from './models/ProcessInfos'
-import { Parser } from './models/Parser'
-import { parsing } from './Parsers'
+import { parsing, Parser } from './parsers'
 import { Queue } from './models/Queue'
 import { Offer } from './models/Offer'
 import { config } from '../config'
@@ -569,7 +568,7 @@ class TradeManager {
    * @param line The log/clipboard text line that need to be parsed
    */
   private parseLine(
-    parser: Parser,
+    parser: any,
     line: string
   ): { ok: boolean; value: Offer | undefined } {
     if (parser.validate(line)) {
@@ -609,14 +608,22 @@ class TradeManager {
       }
     }
 
-    const result = this.parseLine(parsing.en[type], line)
+    let result: { ok: boolean, value: Offer | undefined } | undefined;
 
-    if (result.ok) {
-      console.debug('Parsing: ', type, result.value)
+    for (let lang in parsing) {
+      result = this.parseLine(parsing[lang][type], line);
+
+      if (result.ok) {
+        break;
+      }
+    }
+
+    if (result!.ok) {
+      console.debug('Parsing: ', type, result!.value)
 
       switch (type) {
         case 'incomingOffer':
-          overlayWindow!.webContents.send(NEW_INCOMING_OFFER, result.value)
+          overlayWindow!.webContents.send(NEW_INCOMING_OFFER, result!.value)
           break
 
         case 'outgoingOffer':
@@ -624,7 +631,7 @@ class TradeManager {
             this.sendWhisper(line)
           }
 
-          overlayWindow!.webContents.send(NEW_OUTGOING_OFFER, result.value)
+          overlayWindow!.webContents.send(NEW_OUTGOING_OFFER, result!.value)
           break
 
         case 'tradeAccepted':
@@ -636,7 +643,7 @@ class TradeManager {
           break
 
         case 'playerJoined':
-          overlayWindow!.webContents.send(PLAYER_JOINED, result.value)
+          overlayWindow!.webContents.send(PLAYER_JOINED, result!.value)
           break
       }
     }
