@@ -4,10 +4,19 @@ import path from 'path'
 import crypto from 'crypto'
 import fs from 'fs'
 
-export function createFileProtocol () {
+export function createFileProtocol() {
   protocol.registerFileProtocol('app-file', (req, resp) => {
     resp({ path: path.join(app.getPath('userData'), 'apt-data/files', req.url.substr('app-file://'.length)) })
-  })
+  });
+
+  protocol.registerFileProtocol('user-file', (req, resp) => {
+    const url = req.url.replace('user-file://', '')
+    try {
+      return resp(decodeURIComponent(url));
+    } catch (error) {
+      console.error(error)
+    }
+  });
 
   ipcMain.on(IMPORT_FILE, (e, filePath: string) => {
     const file = fs.readFileSync(filePath)
