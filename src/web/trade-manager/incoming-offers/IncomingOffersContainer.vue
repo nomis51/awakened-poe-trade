@@ -1,7 +1,14 @@
 <template>
   <div
     id="incoming-offers-container"
-    style="bottom: 20px; left: 50%; height: 60px; width: 43%; position: absolute; transform: translateX(-50%);"
+    style="
+      bottom: 20px;
+      left: 50%;
+      height: 60px;
+      width: 43%;
+      position: absolute;
+      transform: translateX(-50%);
+    "
     class="flex-grow flex h-full"
   >
     <IncomingOffer
@@ -28,9 +35,8 @@ import {
   NEW_INCOMING_OFFER,
   TRADE_ACCEPTED,
   TRADE_CANCELLED,
-  PLAYER_JOINED
+  PLAYER_JOINED,
 } from "@/ipc/ipc-event";
-import { play, playFromFile } from "../audioPlayer";
 import { Config } from "@/web/Config";
 
 import IncomingOffer from "./IncomingOffer";
@@ -38,16 +44,28 @@ import { config } from "winston";
 
 const defaultSoundValue = "(default)";
 
+const newOfferAudio =
+  Config.store.tradeManager.sounds.newOffer === defaultSoundValue
+    ? new Audio(require("@/assets/audio/notif1.mp3"))
+    : new Audio("user-file://" + Config.store.tradeManager.sounds.newOffer);
+newOfferAudio.preload = "auto";
+
+const buyerJoinedAudio =
+  Config.store.tradeManager.sounds.buyerJoined === defaultSoundValue
+    ? new Audio(require("@/assets/audio/knocking-on-door.mp3"))
+    : new Audio("user-file://" + Config.store.tradeManager.sounds.buyerJoined);
+buyerJoinedAudio.preload = "auto";
+
 export default {
   components: {
-    IncomingOffer
+    IncomingOffer,
   },
   created() {
     this.handleEvents();
   },
   data() {
     return {
-      offers: []
+      offers: [],
     };
   },
   methods: {
@@ -59,11 +77,8 @@ export default {
        * Any new incoming offers from the Client.txt file
        */
       MainProcess.addEventListener(NEW_INCOMING_OFFER, ({ detail: offer }) => {
-        if (Config.store.tradeManager.sounds.newOffer === defaultSoundValue) {
-          play(require("@/assets/audio/notif1.mp3"));
-        } else {
-          playFromFile(Config.store.tradeManager.sounds.newOffer);
-        }
+        console.log(newOfferAudio);
+        newOfferAudio.play();
         this.offers.push(offer);
       });
 
@@ -71,7 +86,7 @@ export default {
        * Any "Trade accepted" message that might help removing completed offers
        */
       MainProcess.addEventListener(TRADE_ACCEPTED, () => {
-        const offer = this.offers.find(o => o.tradeRequestSent);
+        const offer = this.offers.find((o) => o.tradeRequestSent);
 
         if (Config.store.tradeManager.autoThanks) {
           if (offer) {
@@ -103,7 +118,7 @@ export default {
           if (this.offers[i].player === player) {
             for (const vo of this.$refs.offers) {
               if (this.offers[i].id === vo.offer.id) {
-                play(require("@/assets/audio/knocking-on-door.mp3"));
+               buyerJoinedAudio.play();
                 vo.setPlayerJoined();
               }
             }
@@ -115,7 +130,7 @@ export default {
      * Remove an offer from the view
      */
     dismiss(offer) {
-      const index = this.offers.findIndex(o => o.id === offer.id);
+      const index = this.offers.findIndex((o) => o.id === offer.id);
 
       if (index !== -1) {
         this.offers.splice(index, 1);
@@ -163,7 +178,7 @@ export default {
      * a Trade Request command using the offer provided
      */
     sendTradeRequest(offer) {
-      const index = this.offers.findIndex(o => o.id === offer.id);
+      const index = this.offers.findIndex((o) => o.id === offer.id);
 
       if (index !== -1) {
         this.offers[index].tradeRequestSent = true;
@@ -177,8 +192,8 @@ export default {
      */
     highlightItem(offer) {
       MainProcess.highlightOfferItem(offer);
-    }
-  }
+    },
+  },
 };
 </script>
 

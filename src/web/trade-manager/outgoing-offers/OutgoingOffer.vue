@@ -66,9 +66,15 @@
 
 <script>
 import { MainProcess } from '../../../ipc/main-process-bindings'
-import { play } from '../audioPlayer';
+import { Config } from "@/web/Config";
 
-const clickAudioFile = require('@/assets/audio/click.wav');
+const defaultSoundValue = "(default)";
+
+const clickAudio =
+  Config.store.tradeManager.sounds.uiClick === defaultSoundValue
+    ? new Audio(require("@/assets/audio/click.wav"))
+    : new Audio("user-file://" + Config.store.tradeManager.sounds.uiClick);
+clickAudio.preload = "auto";
 
 export default {
   props: ['offer'],
@@ -121,19 +127,19 @@ export default {
       }, 1000)
     },
     sendJoinHideout () {
-       play(clickAudioFile);
+       clickAudio.play();
       MainProcess.focusGame()
       this.$emit('joinHideout')
       this.hideoutJoined = true
     },
     sendTradeRequest () {
-       play(clickAudioFile);
+       clickAudio.play();
       MainProcess.focusGame()
       this.$emit('tradeRequest')
       this.tradeRequestSent = true
     },
     dismiss () {
-       play(clickAudioFile);
+       clickAudio.play();
       MainProcess.focusGame()
       this.$emit('dismiss')
     }

@@ -1,6 +1,6 @@
 <template>
   <div class="incoming-offer bg-gray-800 mx-1 rounded ripple">
-    <table style="width: 100%;border-radius: 0.25; border: 1px solid #000">
+    <table style="width: 100%; border-radius: 0.25; border: 1px solid #000">
       <tr
         class="bg-gray-900 incoming-offer-header"
         @click.exact="offerClicked"
@@ -95,17 +95,23 @@
 </template>
 
 <script>
-import { MainProcess } from '../../../ipc/main-process-bindings';
-import { play } from '../audioPlayer';
+import { MainProcess } from "../../../ipc/main-process-bindings";
+import { Config } from "@/web/Config";
 
-const clickAudioFile = require('@/assets/audio/click.wav');
+const defaultSoundValue = "(default)";
+
+const clickAudio =
+  Config.store.tradeManager.sounds.uiClick === defaultSoundValue
+    ? new Audio(require("@/assets/audio/click.wav"))
+    : new Audio("user-file://" + Config.store.tradeManager.sounds.uiClick);
+clickAudio.preload = "auto";
 
 export default {
-  props: ['offer'],
+  props: ["offer"],
   filters: {
-    elipsis: function(value, length = 10) {
+    elipsis: function (value, length = 10) {
       if (!value) {
-        return '';
+        return "";
       }
 
       const strValue = value.toString();
@@ -113,19 +119,19 @@ export default {
         ? `${strValue.substring(0, length - 1)}...`
         : strValue;
     },
-    time: function(value) {
+    time: function (value) {
       if (!value) {
-        return '';
+        return "";
       }
 
       return value.substring(11);
-    }
+    },
   },
   data: () => ({
     partyInviteSent: false,
     tradeRequestSent: false,
     playerJoined: false,
-    showDetails: false
+    showDetails: false,
   }),
   methods: {
     setPlayerJoined() {
@@ -135,7 +141,7 @@ export default {
       this.tradeRequestSent = state;
     },
     offerClicked() {
-      play(clickAudioFile);
+      clickAudio.play();
       MainProcess.focusGame();
 
       if (this.partyInviteSent) {
@@ -145,50 +151,50 @@ export default {
       }
     },
     sendTradeRequest() {
-      play(clickAudioFile);
-      this.$emit('tradeRequest');
+      clickAudio.play();
+      this.$emit("tradeRequest");
       this.tradeRequestSent = true;
     },
     sendPartyInvite(focusGame = false) {
-      play(clickAudioFile);
+      clickAudio.play();
       if (focusGame) {
         MainProcess.focusGame();
       }
 
-      this.$emit('partyInvite');
+      this.$emit("partyInvite");
       this.partyInviteSent = true;
     },
     sendStillInterestedWhisper() {
-      play(clickAudioFile);
+      clickAudio.play();
       MainProcess.focusGame();
-      this.$emit('stillInterested');
+      this.$emit("stillInterested");
     },
     dismiss() {
-      play(clickAudioFile);
+      clickAudio.play();
       MainProcess.focusGame();
-      this.$emit('dismiss');
+      this.$emit("dismiss");
     },
     remove() {
-      play(clickAudioFile);
+      clickAudio.play();
       MainProcess.focusGame();
-      this.$emit('remove');
+      this.$emit("remove");
     },
     sendSoldWhisper() {
-      play(clickAudioFile);
+      clickAudio.play();
       MainProcess.focusGame();
-      this.$emit('sold');
+      this.$emit("sold");
     },
     sendBusyWhisper() {
-      play(clickAudioFile);
+      clickAudio.play();
       MainProcess.focusGame();
-      this.$emit('busy');
+      this.$emit("busy");
     },
     highlightItem() {
-      play(clickAudioFile);
+      clickAudio.play();
       MainProcess.focusGame();
-      this.$emit('highlightItem');
-    }
-  }
+      this.$emit("highlightItem");
+    },
+  },
 };
 </script>
 
