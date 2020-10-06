@@ -132,7 +132,7 @@ export const defaultConfig: Config = {
       newOffer: '(default)',
       buyerJoined: '(default)',
       uiClick: '(default)'
-    }
+    },
   },
   widgets: [
     // --- REQUIRED ---

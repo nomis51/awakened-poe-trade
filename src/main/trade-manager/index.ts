@@ -32,8 +32,9 @@ import {
 import { ProcessInfos } from './models/ProcessInfos'
 import { parsing, Parser } from './parsers'
 import { Queue } from './models/Queue'
-import { Offer } from './models/Offer'
+import { Offer, toDbSchema } from './models/Offer'
 import { config } from '../config'
+import { tradeStore } from './store'
 
 interface WhisperVar {
   token: string,
@@ -318,6 +319,8 @@ class TradeManager {
     }
 
     setTimeout(() => (this.isPollingClipboard = true), 500)
+
+    tradeStore.create(toDbSchema(offer));
   }
 
   /**

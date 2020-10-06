@@ -26,6 +26,7 @@
   "main": "background.js",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.14.x",
+    "ajv": "^6.12.5",
     "dot-prop": "5.3.x",
     "electron-overlay-window": "1.0.x",
     "electron-store": "5.2.x",
@@ -34,6 +35,7 @@
     "find-process": "^1.4.3",
     "lodash": "^4.17.20",
     "luxon": "1.25.x",
+    "nedb-promises": "^4.0.4",
     "portal-vue": "2.1.7",
     "robotjs": "^0.6.0",
     "tailwindcss": "1.8.x",

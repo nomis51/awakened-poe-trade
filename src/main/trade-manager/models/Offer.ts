@@ -1,3 +1,5 @@
+import { TradeSchema } from '../store'
+
 /**
  * Define the Offer class
  * Is a logical representation of a trading whisper
@@ -21,4 +23,15 @@ export interface Offer {
     left: string;
     top: string;
   }
+}
+
+export const toDbSchema = (offer:Offer)=>{
+  return {
+    time: new Date(offer.time),
+    item: offer.item,
+    price: `${offer.price.value} ${offer.price.currency}`,
+    player: offer.player,
+    league: offer.league,
+    location: `tab: "${offer.location.tab}"; position: left ${offer.location.left}, top ${offer.location.top}`
+  } as TradeSchema
 }
