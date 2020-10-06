@@ -121,7 +121,12 @@
       </div>
 
       <div class="mb-2">
-        <div class="flex-1 mb-1">{{ $t("New offer notification sound") }}</div>
+        <div class="flex-1 mb-1">
+          {{ $t("New offer notification sound")
+          }}<span class="bg-gray-200 text-gray-900 rounded px-1">{{
+            $t("Restart required")
+          }}</span>
+        </div>
         <div class="mb-4 flex">
           <input
             v-model.trim="config.tradeManager.sounds.newOffer"
@@ -136,17 +141,25 @@
             @input="handleFile($event, 'newOffer')"
           />
           <label
-            class="text-gray-400 bg-gray-900 px-2  ml-px cursor-pointer"
+            class="text-gray-400 bg-gray-900 px-2 ml-px cursor-pointer"
             for="file"
             >{{ $t("Browse") }}</label
           >
-          <button @click="config.tradeManager.sounds.newOffer = '(default)'" class="px-3 bg-gray-900 rounded-r mr-2">Clear</button>
+          <button
+            @click="config.tradeManager.sounds.newOffer = '(default)'"
+            class="px-3 bg-gray-900 rounded-r mr-2"
+          >
+            Clear
+          </button>
         </div>
       </div>
 
       <div class="mb-2">
         <div class="flex-1 mb-1">
           {{ $t("The buyer has joined the area notification sound") }}
+          <span class="bg-gray-200 text-gray-900 rounded px-1">{{
+            $t("Restart required")
+          }}</span>
         </div>
         <div class="mb-4 flex">
           <input
@@ -161,18 +174,26 @@
             accept="audio/*"
             @input="handleFile($event, 'buyerJoined')"
           />
-           <label
-            class="text-gray-400 bg-gray-900 px-2  ml-px cursor-pointer"
+          <label
+            class="text-gray-400 bg-gray-900 px-2 ml-px cursor-pointer"
             for="file"
             >{{ $t("Browse") }}</label
           >
-          <button @click="config.tradeManager.sounds.buyerJoined = '(default)'" class="px-3 bg-gray-900 rounded-r mr-2">Clear</button>
+          <button
+            @click="config.tradeManager.sounds.buyerJoined = '(default)'"
+            class="px-3 bg-gray-900 rounded-r mr-2"
+          >
+            Clear
+          </button>
         </div>
       </div>
 
       <div class="mb-2">
         <div class="flex-1 mb-1">
           {{ $t("Interface click sound effect") }}
+          <span class="bg-gray-200 text-gray-900 rounded px-1">{{
+            $t("Restart required")
+          }}</span>
         </div>
         <div class="mb-4 flex">
           <input
@@ -188,11 +209,16 @@
             @input="handleFile($event, 'uiClick')"
           />
           <label
-            class="text-gray-400 bg-gray-900 px-2  ml-px cursor-pointer"
+            class="text-gray-400 bg-gray-900 px-2 ml-px cursor-pointer"
             for="file"
             >{{ $t("Browse") }}</label
           >
-           <button @click="config.tradeManager.sounds.uiClick = '(default)'" class="px-3 bg-gray-900 rounded-r mr-2">Clear</button>
+          <button
+            @click="config.tradeManager.sounds.uiClick = '(default)'"
+            class="px-3 bg-gray-900 rounded-r mr-2"
+          >
+            Clear
+          </button>
         </div>
       </div>
     </div>
@@ -207,7 +233,7 @@ export default {
   computed: {
     config() {
       return Config.store;
-    }
+    },
   },
   methods: {
     handleFile(e, soundName) {
@@ -215,7 +241,7 @@ export default {
       this.config.tradeManager.sounds[
         soundName
       ] = e.target.files[0].path.replace(/\\/g, "/");
-    }
-  }
+    },
+  },
 };
 </script>
