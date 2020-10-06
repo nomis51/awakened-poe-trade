@@ -396,41 +396,58 @@ class TradeManager {
     return procs.length > 0 ? <ProcessInfos>procs[0] : undefined
   }
 
+  private tryStart(): Promise<{
+    ok: boolean,
+    process: ProcessInfos | undefined
+  }> {
+    return new Promise(async (resolve) => {
+      let poeProc = await this.findPoEProcess();
+
+      if (!poeProc) {
+        console.warn(
+          `Unable to find PoE process, make sure the game is running. Retrying in ${POE_PROCESS_RETRY_RATE_MS /
+          1000} second(s)...`
+        )
+
+        setTimeout(() => {
+          resolve({
+            ok: false,
+            process: undefined
+          });
+        }, POE_PROCESS_RETRY_RATE_MS);
+      }
+
+      resolve({
+        ok: true,
+        process: poeProc
+      });
+    });
+  }
+
   /**
    * Start the trade manager.
    */
   async start(): Promise<boolean> {
-    const poeProc = await this.findPoEProcess()
+    let poeProc: {
+      ok: boolean,
+      process: ProcessInfos | undefined
+    } | null = null;
 
-    if (!poeProc) {
-      console.warn(
-        `Unable to find PoE process, make sure the game is running. Retrying in ${POE_PROCESS_RETRY_RATE_MS /
-        1000} second(s)...`
-      )
+    do {
+      poeProc = await this.tryStart();
+    } while (!poeProc);
 
-      if (!this.retryInterval) {
-        this.retryInterval = setTimeout(async () => {
-          if (await this.start()) {
-            clearInterval(this.retryInterval)
-            this.retryInterval = null
-          } else {
-            console.log('PoE process found. Starting the trade manager...')
-          }
-        }, POE_PROCESS_RETRY_RATE_MS)
-      }
-
-      return false
-    }
+    console.info('PoE process found. Starting the trade manager...')
 
     if (platform() === 'win32') {
-      this.logFilePath = `${poeProc.bin.substring(
+      this.logFilePath = `${poeProc.process!.bin.substring(
         0,
-        poeProc.bin.lastIndexOf('\\')
+        poeProc.process!.bin.lastIndexOf('\\')
       )}\\logs\\Client.txt`
     } else {
-      this.logFilePath = `${poeProc.bin.substring(
+      this.logFilePath = `${poeProc.process!.bin.substring(
         0,
-        poeProc.bin.lastIndexOf('/')
+        poeProc.process!.bin.lastIndexOf('/')
       )}/logs/Client.txt`
     }
 
@@ -619,7 +636,7 @@ class TradeManager {
     }
 
     if (result!.ok) {
-      console.debug('Parsing: ', type, result!.value)
+      console.debug('Object parsed: ', type, result!.value)
 
       switch (type) {
         case 'incomingOffer':
